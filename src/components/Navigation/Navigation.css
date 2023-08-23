@@ -1,0 +1,81 @@
+.navigation {
+    display: flex;
+    gap: 30px;
+  }
+  .navigation__main {
+    display: flex;
+    justify-content: space-between;
+    gap: 245px;
+  }
+  
+  .navigation__link {
+    margin: 0;
+    padding-top: 11px;
+    color: #fff;
+    text-align: right;
+    font-family: Inter;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 16px;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  .navigation__button {
+    margin-top: 3px;
+    border-radius: 3px;
+    background-color: #3ddc84;
+    width: 76px;
+    height: 32px;
+    text-align: center;
+    color: #000;
+    font-family: Inter;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 30px;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  
+  .navigation__nav-link {
+    color: white;
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 18px;
+  }
+  .navigation__profile {
+    display: flex;
+    gap: 9.5px;
+    margin-right: 70px;
+  }
+  .navigation__movie {
+    display: flex;
+    gap: 16px;
+  }
+  .navigation__profile-logo {
+    width: 150px;
+    height: 50px;
+    margin: -15px 0 0 0;
+  }
+  
+  @media screen and (max-width: 320px) {
+    .navigation {
+      gap: 14px;
+    }
+    .navigation__button {
+      margin-top: 6px;
+      width: 54px;
+      height: 26px;
+      font-size: 12px;
+      font-size: 10px;
+      line-height: 25px;
+    }
+    .navigation__nav-link {
+      font-size: 10px;
+      line-height: 16px;
+    }
+  }
