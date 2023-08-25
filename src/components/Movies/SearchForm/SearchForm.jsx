@@ -5,10 +5,12 @@ import FilterCheckbox from "../FilterCheckbox/FilterCheckbox";
 
 function SearchForm() {
   return (
-    <section className="serach">
-      <form className="serach__form">
-        <input className="serach__form_input" placeholder="Фильм"></input>
-        <button className="serach__form_button" type="button" />
+    <section className="search">
+      <form className="search__form">
+      <div className="search__form_item">
+        <input className="search__form_input" placeholder="Фильм"></input>
+        <button className="search__form_button" type="button" />
+        </div>
       </form>
       <FilterCheckbox />
     </section>

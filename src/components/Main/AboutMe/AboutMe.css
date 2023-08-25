@@ -38,7 +38,7 @@
     font-weight: 400;
     letter-spacing: -2px;
   }
-  .about__text-content_student-major {
+  .about__text-content_student-main {
     margin: 18px 0;
     font-size: 18px;
     font-style: normal;
@@ -57,6 +57,9 @@
     line-height: normal;
     color: #fff;
     text-decoration: none;
+  }
+  .about__link-github:hover{
+    opacity: .7;
   }
   .about__student_photo {
     margin: 6px 0;
@@ -84,7 +87,7 @@
     .about__link-github {
       margin: 85px auto;
     }
-    .about__text-content_student-major {
+    .about__text-content_student-main {
       margin: 14px 0 0;
       font-size: 12px;
       line-height: 18px;
@@ -157,7 +160,7 @@
     .about__student-info {
       flex-direction: column-reverse;
     }
-    .about__text-content_student {
+    .about__text-content_student-main {
       margin: 21px 0 20px 0;
       font-size: 11px;
       line-height: 16px;

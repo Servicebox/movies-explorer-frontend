@@ -8,7 +8,7 @@ function FilterCheckbox (){
         <span className="filterCheckbox__span">Короткометражки</span>
     </section>
 
-  )
+  );
 }
 
 export default FilterCheckbox;

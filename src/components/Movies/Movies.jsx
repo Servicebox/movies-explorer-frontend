@@ -1,21 +1,21 @@
 import React from "react";
 import "./Movies.css";
+import AddMoviesTable from "./AddMoviesTable/AddMoviesTable";
 import SearchForm from "./SearchForm/SearchForm";
+import NavTab from "../NavTab/NavTab";
 import MoviesCardList from "./MoviesCardList/MoviesCardList";
-import AddMoviesObject from "./AddMoviesObject/AddMoviesObject";
 import { moviesList } from "../../utils/constants";
-// import NavTab from "../NavTab/NavTab";
 
 function Movies (){
   return(
     <section className="movies">
       <SearchForm />
       <MoviesCardList
-       moviesList={moviesList.slice(0)}
+       movieCardList={moviesList.slice(0)}
        />
-      <AddMoviesObject />
+      <AddMoviesTable />
     </section>
-  )
+  );
 }
 
 export default Movies;

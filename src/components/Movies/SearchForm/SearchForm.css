@@ -1,31 +1,76 @@
-.serach {
-    width: 1140px;
-    margin: 0 70px;
-    padding: 0;
+.search {
+  margin: 0 70px 0;
+  padding: 0;
+}
+.search__form {
+  margin: 53px auto;
+  display: flex;
+  gap: 5px;
+  max-width: 1140px;
+  overflow: hidden;
+}
+.search__form_item {
+  margin: 0;
+  padding: 0;
+  border-bottom: 1px solid #424242;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+.search__form_input {
+  max-width: 100%;
+  margin: 0;
+  background-color: transparent;
+  border: none;
+  font-size: 28px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 63px;
+  text-align: left;
+  outline: none;
+}
+.search__form_button {
+  margin: 16px 0;
+  padding: 0;
+  background-image: url(../../../images/find.svg);
+  background-color: transparent;
+  width: 80px;
+  height: 34px;
+  background-repeat: no-repeat;
+  border: none;
+}
+.search__form_button:hover {
+  opacity: 0.8;
+}
+@media screen and (max-width: 768px) {
+  .search {
+    margin: 0 30px 0;
   }
-  .serach__form {
-    margin: 70px 0 0 0;
-    display: flex;
-    gap: 5px;
+  .search__form_button {
+    margin: 24px 0 0;
   }
-  .serach__form_input {
-    width: 1140px;
-    margin: 0 auto;
-    background-color: transparent;
-    border: none;
-    border-bottom: 1px solid #424242;
-    font-size: 28px;
-    font-style: normal;
-    font-weight: 500;
+  .search__form_input {
+    margin: 7px 0 0;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .search {
+    margin: 16px auto 0;
+    max-width: 100%;
+  }
+  .search__form_button {
+    margin: 12px 0 0;
+  }
+  .search__form_input {
+    margin: 17px 0 14px;
+    font-size: 18px;
     line-height: normal;
-    outline:none;
+    max-width: 292px;
   }
-  .serach__form_button {
-    margin: 0 0 0 -85px;
-    background-image: url(../../../images/find.svg);
-    background-color: transparent;
-    width: 80px;
-    height: 34px;
-    background-repeat: no-repeat;
-    border: none;
+  .search__form {
+    max-width: 320px;
+    padding-left: 14px;
+    padding-right: 14px;
   }
+}

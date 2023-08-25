@@ -7,12 +7,13 @@
 }
 .header_main {
   background-color: #073042;
+  
 }
 .header_movie {
   display: flex;
   max-height: 74px;
   padding: 18px 70px;
-  gap: 426px;
+ 
   background-color: #202020;
 }
 .header_login {
@@ -29,7 +30,7 @@
   height: 38px;
   display: block;
 }
-.heder__title {
+.header__title {
   color: #fff;
   font-size: 24px;
   font-style: normal;

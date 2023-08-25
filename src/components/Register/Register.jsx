@@ -6,13 +6,13 @@ function Register() {
   return (
     <section className="register">
       <form className="register__form form">
-        <div className="register__form_tag form_tag"> Имя </div>
+        <label className="register__form_label form_tag"> Имя </label>
         <input className="register__form_input form_input"></input>
 
-        <div className="register__form_tag form_tag">E-mail</div>
+        <label className="register__form_label form_tag">E-mail</label>
         <input className="register__form_input form_input"></input>
 
-        <div className="register__form_tag form_tag">Пароль</div>
+        <label className="register__form_label form_tag">Пароль</label>
         <input className="register__form_input form_input"></input>
 
         <span className="register__form_span-error form_span-error"></span>

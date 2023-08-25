@@ -10,10 +10,9 @@ function AboutMe() {
       <div className="about__student-info">
         <div className="about__text-content">
           <h3 className="about__text-content_subtitle">
-            {" "}
             Виталий
           </h3>
-          <p className="about__text-content_student">
+          <p className="about__text-content_student-main">
             Фронтенд-разработчик, 30 лет
           </p>
           <p className="about__text-content_caption">
