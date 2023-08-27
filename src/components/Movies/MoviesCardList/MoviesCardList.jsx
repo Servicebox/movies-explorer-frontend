@@ -1,7 +1,7 @@
 import React from "react";
+import "./MoviesCardList.css";
 import MoviesCard from "../MoviesCard/MoviesCard";
 import { moviesList } from "../../../utils/constants";
-import "./MoviesCardList.css";
 
 function MoviesCardList({ maxVisibleCards }) {
   const visibleMovies = moviesList.slice(0, maxVisibleCards);

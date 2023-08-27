@@ -9,9 +9,7 @@ function AboutMe() {
       <h2 className="about__title section__title">Студент</h2>
       <div className="about__student-info">
         <div className="about__text-content">
-          <h3 className="about__text-content_subtitle">
-            Виталий
-          </h3>
+          <h3 className="about__text-content_subtitle"> Виталий</h3>
           <p className="about__text-content_student-main">
             Фронтенд-разработчик, 30 лет
           </p>
@@ -23,16 +21,15 @@ function AboutMe() {
             заниматься фриланс-заказами и ушёл с постоянной работы.
           </p>
           <Link
-        className="about__link-github"
-        type="link"
-        to="https://github.com/Servicebox"
-      >
-        Github
-      </Link>
+            className="about__link-github"
+            type="link"
+            to="https://github.com/Servicebox"
+          >
+            Github
+          </Link>
         </div>
         <img className="about__student_photo" alt="student" src={student} />
       </div>
-
     </section>
   );
 }

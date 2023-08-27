@@ -1,6 +1,8 @@
-
+// import App from "./App.css";
+// import { useEffect, useState } from "react";
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Preloader from "../Movies/Preloader/Preloader";
 import Movies from "../Movies/Movies";
 import SavedMovies from "../SavedMovies/SavedMovies";
 import Profile from "../Profile/Profile";
@@ -10,7 +12,7 @@ import Header from "../Header/Header";
 import Main from "../Main/Main";
 import Footer from "../Footer/Footer";
 import NotFound from '../NotFound/NotFound';
-import { NavTab } from 'react-router-tabs';
+// import { Context } from "../../contexts/CurrentUserContext";
 
 function App() {
 
@@ -73,15 +75,6 @@ function App() {
               <>
                 <Header />
                 <Register />
-              </>
-            }
-          />
-          <Route
-            path="/nav-tab"
-            element={
-              <>
-                <Header />
-                <NavTab />
               </>
             }
           />

@@ -6,14 +6,23 @@ function Register() {
   return (
     <section className="register">
       <form className="register__form form">
-        <label className="register__form_label form_tag"> Имя </label>
-        <input className="register__form_input form_input"></input>
+        <label className="register__form_tag form_tag"> Имя </label>
+        <input
+          className="register__form_input form_input"
+          placeholder="Виталий"
+        ></input>
 
-        <label className="register__form_label form_tag">E-mail</label>
-        <input className="register__form_input form_input"></input>
+        <label className="register__form_tag form_tag">E-mail</label>
+        <input
+          className="register__form_input form_input"
+          placeholder="pochta@yandex.ru"
+        ></input>
 
-        <label className="register__form_label form_tag">Пароль</label>
-        <input className="register__form_input form_input"></input>
+        <label className="register__form_tag form_tag">Пароль</label>
+        <input
+          className="register__form_input form_input"
+          placeholder="*****"
+        ></input>
 
         <span className="register__form_span-error form_span-error"></span>
         <button className="register__form_button form_button" type="button">

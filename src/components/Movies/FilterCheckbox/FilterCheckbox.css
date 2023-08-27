@@ -31,6 +31,9 @@
   width: 36px;
   height: 20px;
 }
+.filterCheckbox__slider_off {
+  background-image: url(../../../images/smalltumboff.svg);
+}
 .filterCheckbox__span {
   font-size: 13px;
   font-style: normal;

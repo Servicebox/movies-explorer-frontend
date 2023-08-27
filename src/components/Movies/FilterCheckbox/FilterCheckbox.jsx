@@ -1,13 +1,12 @@
 import React from "react";
-import "./FilterCheckbox.css"
+import "./FilterCheckbox.css";
 
-function FilterCheckbox (){
-  return(
+function FilterCheckbox() {
+  return (
     <section className="filterCheckbox">
       <button className="filterCheckbox__slider " type="button" />
-        <span className="filterCheckbox__span">Короткометражки</span>
+      <span className="filterCheckbox__span">Короткометражки</span>
     </section>
-
   );
 }
 

@@ -5,19 +5,14 @@ import { useLocation, Link } from "react-router-dom";
 import logo from "../../images/logo.svg";
 import Navigation from "../Navigation/Navigation";
 import NavTab from "../NavTab/NavTab";
-import profileLogo from "../../images/findno.svg";
+import profileLogo from "../../images/profileno.svg";
 
 function Header() {
   const location = useLocation();
   let className = "header";
   const { pathname } = location;
+  const [shownNavTab, setShownNavTab] = useState(false);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 800);
-  const [shownNavTab, setShowNavTab] = useState(false);
-
-  const closeNavTab = () => {
-    setShowNavTab(false);
-  };
-
 
   useEffect(() => {
     const handleResize = () => {
@@ -30,7 +25,10 @@ function Header() {
     };
   }, []);
 
-  
+  const closeNavTab = () => {
+    setShownNavTab(false);
+  };
+
   const classNameHeader = () => {
     if (pathname === "/") {
       className = `${className} header_main`;
@@ -70,7 +68,7 @@ function Header() {
           <Navigation>
             <button
               className="navigation__button-menu"
-              onClick={() => setShowNavTab(true)}
+              onClick={() => setShownNavTab(true)}
             />
           </Navigation>
         );
@@ -120,7 +118,7 @@ function Header() {
         </Link>
         {navContent()}
       </header>
-      {shownNavTab && <NavTab setShowNavTab={setShowNavTab} closeNavTab={closeNavTab} />}
+      {shownNavTab && <NavTab setShowNavTab={setShownNavTab} closeNavTab={closeNavTab} />}
     </>
   );
 }

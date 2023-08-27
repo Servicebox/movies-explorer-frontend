@@ -9,6 +9,7 @@
   }
   .login__form_button{
     margin: 169px 0 0 0;
+    border: none;
   }
   @media screen and (max-width: 420px) {
     .login__form_button {

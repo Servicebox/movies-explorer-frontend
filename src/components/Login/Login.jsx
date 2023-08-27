@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
-import"./Login.css";
+import "./Login.css";
 
-function Login (){
-  return(
+function Login() {
+  return (
     <section className="login">
       <form className="login__form form">
         <label className="login__form_tag form_tag">E-mail</label>

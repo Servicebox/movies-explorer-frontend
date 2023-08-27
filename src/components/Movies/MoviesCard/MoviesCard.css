@@ -45,7 +45,23 @@
   background-position: center;
   background-size: contain;
 }
-
+@media screen and (max-width: 900px) {
+.moviesCard {
+  width: 339px;
+  height: 257px;
+  margin: 0;
+  border-radius: 10px;
+  background-color: #222;
+  border-radius: 15px;
+}
+.moviesCard__photo {
+  width: 339px;
+  height: 190px;
+}
+.moviesCard__about {
+  margin: 10px 12px 0;
+}
+}
 @media screen and (max-width: 768px) {
   .moviesCard {
     width: 339px;
