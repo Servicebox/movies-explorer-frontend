@@ -74,6 +74,7 @@
   }
   .search-form {
     max-width: 292px;
+    margin: inherit;
   }
 }
 @media screen and (min-width: 1280px) {
