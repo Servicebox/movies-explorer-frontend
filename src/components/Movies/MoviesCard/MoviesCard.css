@@ -1,95 +1,47 @@
 .moviesCard {
-  width: 270px;
-  height: 218px;
-  margin: 0;
-  border-radius: 10px;
-  background-color: #222;
-  border-radius: 15px;
-  overflow: hidden;
-}
-.moviesCard__photo {
-  width: 270px;
-  height: 151px;
-}
-.moviesCard__about {
-  margin: 14px 12px 0;
-  display: flex;
-  gap: 24px;
-  max-width: 100%;
-}
-.moviesCard__about_text-content {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-.moviesCard__about_text-content_type_name {
-  font-size: 13px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: normal;
-}
-.moviesCard__about_text-content_type_time {
-  color: #8b8b8b;
-  font-size: 11px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
-}
-.moviesCard__about_checkBox {
-  background-image: url(../../../images/save8d.svg);
-  margin: -5px;
-  width: 27px;
-  height: 27px;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: contain;
-}
-@media screen and (max-width: 900px) {
-.moviesCard {
-  width: 339px;
-  height: 257px;
-  margin: 0;
-  border-radius: 10px;
-  background-color: #222;
-  border-radius: 15px;
-}
-.moviesCard__photo {
-  width: 339px;
-  height: 190px;
-}
-.moviesCard__about {
-  margin: 10px 12px 0;
-}
-}
-@media screen and (max-width: 768px) {
-  .moviesCard {
-    width: 339px;
-    height: 257px;
+    width: 270px;
+    height: 218px;
     margin: 0;
     border-radius: 10px;
     background-color: #222;
-    border-radius: 15px;
   }
   .moviesCard__photo {
-    width: 339px;
-    height: 190px;
+    width: 270px;
+    height: 151px;
+    border-radius: 10px;
   }
   .moviesCard__about {
-    margin: 10px 12px 0;
+    margin: 14px auto 0;
+    display: flex;
+    gap: 24px;
+    width: 246px;
+    color: white;
   }
-}
-@media screen and (max-width: 700px) {
-  .moviesCard {
-    width: 300px;
-    height: 235px;
-    margin: 0;
-    border-radius: 10px;
-    background-color: #222;
-    border-radius: 15px;
+  .moviesCard__about_text-content {
+    width: 206px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
   }
-  .moviesCard__photo {
-    width: 300px;
-    height: 168px;
+  .moviesCard__about_text-content_type_name {
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
   }
-}
+  .moviesCard__about_text-content_type_time {
+    color: #8b8b8b;
+    font-size: 11px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+  }
+  .moviesCard__about_checkBox {
+    background-image: url(../../../images/save8d.svg);
+    width: 16px;
+    height: 16px;
+    background-repeat: no-repeat;
+    background-position:center;
+    background-size: contain;
+  
+  }

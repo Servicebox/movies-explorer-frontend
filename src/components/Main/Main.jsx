@@ -8,13 +8,13 @@ import Techs from "./Techs/Techs";
 
 function Main() {
   return (
-    <main className="main">
+    <section className="main">
       <Promo />
       <AboutProject />
       <Techs />
       <AboutMe />
       <Portfolio />
-    </main>
+    </section>
   );
 }
 

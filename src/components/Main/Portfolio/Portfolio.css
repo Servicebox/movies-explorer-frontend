@@ -35,9 +35,6 @@
     font-weight: 400;
     line-height: 50px;
   }
-  .portfolio-link__text:hover {
-    opacity: 0.7;
-  }
   .about__portfolio-link_image{
     background-image: url(../../../images/strelka.svg);
     margin: 13px 6px;
@@ -76,7 +73,7 @@
     }
     .portfolio__title {
       margin: 0;
-      padding: 0 0 20px;
+      padding: 0 0 40px;
       color: #8b8b8b;
       font-size: 14px;
       line-height: 20px;
