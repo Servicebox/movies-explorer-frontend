@@ -7,7 +7,6 @@ function Portfolio (){
     <h4 className="portfolio__title">Портфолио</h4>
     <Link
       className="portfolio__link"
-      type="link"
       to="https://github.com/Servicebox/how-to-learn"
       target="_blank" rel="noopener noreferrer"
     >
@@ -18,7 +17,6 @@ function Portfolio (){
     </Link>
     <Link
       className="portfolio__link"
-      type="link"
       to="https://github.com/Servicebox/russian-travel"
       target="_blank" rel="noopener noreferrer"
     >
@@ -30,7 +28,6 @@ function Portfolio (){
     </Link>
     <Link
       className="portfolio__link"
-      type="link"
       to="https://github.com/Servicebox/react-mesto-api-full-gha"
       target="_blank" rel="noopener noreferrer"
     >

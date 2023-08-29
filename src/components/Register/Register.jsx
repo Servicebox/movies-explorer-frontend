@@ -32,7 +32,6 @@ function Register() {
           Уже зарегистрированны?
           <Link
             className="register__form_link form_link"
-            type="link"
             to="/signin"
           >
             Войти

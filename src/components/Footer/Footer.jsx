@@ -4,16 +4,15 @@ import { Link } from "react-router-dom";
 
 function Footer() {
   return (
-    <section className="footer">
+    <footer className="footer">
       <h2 className="footer__title">
         Учебный проект Яндекс.Практикум х BeatFilm.
       </h2>
-      <div className="footer__navigation">
+      <nav className="footer__navigation">
         <p className="foter__caption"> © 2023</p>
         <div className="footer__links">
           <Link
             className="footer__link"
-            type="link"
             to="https://practicum.yandex.ru/"
             target="_blank" rel="noopener noreferrer"
           >
@@ -21,15 +20,14 @@ function Footer() {
           </Link>
           <Link
             className="footer__link"
-            type="link"
             to="https://github.com/Servicebox"
             target="_blank" rel="noopener noreferrer"
           >
             Github
           </Link>
         </div>
-      </div>
-    </section>
+      </nav>
+    </footer>
   );
 }
 

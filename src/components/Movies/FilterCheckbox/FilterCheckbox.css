@@ -15,7 +15,7 @@
 @media screen and (max-width: 600px) {
   .filterCheckbox {
     margin: 42px auto 0;
-    max-width: 165px;
+    max-width: 168px;
     flex-direction: row-reverse;
     justify-content: end;
   }

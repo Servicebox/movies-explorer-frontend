@@ -3,9 +3,6 @@
 
 
 .page{
-  line-height: 1.15;
-  -webkit-text-size-adjust: 100%;
-  background-color: #202020;
   overflow-x: hidden;
 }
 body {
