@@ -9,17 +9,19 @@ function Footer() {
         Учебный проект Яндекс.Практикум х BeatFilm.
       </h2>
       <nav className="footer__navigation">
-        <p className="foter__caption"> © 2023</p>
+        <p className="footer__caption"> © 2023</p>
         <div className="footer__links">
           <Link
             className="footer__link"
-            to="https://practicum.yandex.ru/"
+            type="link"
             target="_blank" rel="noopener noreferrer"
-          >
+            to="https://practicum.yandex.ru/"
+          > 
             Яндекс.Практикум
           </Link>
           <Link
             className="footer__link"
+            type="link"
             to="https://github.com/Servicebox"
             target="_blank" rel="noopener noreferrer"
           >

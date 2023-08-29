@@ -4,7 +4,6 @@ import SearchForm from "./SearchForm/SearchForm";
 import MoviesCardList from "./MoviesCardList/MoviesCardList";
 import AddMoviesTable from "./AddMoviesTable/AddMoviesTable";
 import { moviesList } from "../../utils/constants";
-import NavTab from "../NavTab/NavTab";
 
 function Movies() {
   return (
