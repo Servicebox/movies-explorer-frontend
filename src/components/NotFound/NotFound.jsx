@@ -16,7 +16,7 @@ function NotFound (){
 
     <button className="notFound__button" type="button" onClick={goBack}>Назад</button>
     </section>
-  )
+  );
 }
 
 export default NotFound;
