@@ -1,3 +1,11 @@
 .savedMovies {
 width: 100vw;
+margin: 0 auto;
+padding-bottom: 240px;
+}
+@media screen and (max-width: 600px) {
+    .savedMovies {
+        margin: 70px auto;
+        padding-bottom: 205px;
+    }
 }

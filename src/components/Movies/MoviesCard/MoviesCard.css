@@ -1,7 +1,7 @@
 .moviesCard {
   width: 270px;
   height: 218px;
-  margin: 0;
+  margin: 0 auto;
   border-radius: 10px;
   background-color: #222;
   border-radius: 15px;
@@ -12,7 +12,7 @@
   height: 151px;
 }
 .moviesCard__about {
-  margin: 14px 12px 0;
+  margin: 10px 12px 0;
   display: flex;
   gap: 24px;
   max-width: 100%;
@@ -37,13 +37,14 @@
   line-height: normal;
 }
 .moviesCard__about_checkBox {
-  background-image: url(../../../images/save8d.svg);
+  background-image: url(../../../images/d8.svg);
   margin: -5px;
   width: 27px;
   height: 27px;
   background-repeat: no-repeat;
   background-position: center;
   background-size: contain;
+  background-position:top;
 }
 @media screen and (max-width: 900px) {
 .moviesCard {
