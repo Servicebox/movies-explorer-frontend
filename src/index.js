@@ -4,14 +4,11 @@ import './index.css';
 import App from './components/App/App.jsx';
 import reportWebVitals from './reportWebVitals';
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  < section className='page'>
-    <React.StrictMode>
+  <React.StrictMode>
     <App />
   </React.StrictMode>
-  </section>
-
 );
 
 // If you want to start measuring performance in your app, pass a function

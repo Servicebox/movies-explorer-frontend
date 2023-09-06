@@ -1,14 +1,15 @@
 import React from "react";
 import SearchForm from "../Movies/SearchForm/SearchForm";
 import MoviesCardList from "../Movies/MoviesCardList/MoviesCardList";
+import { moviesList } from "../../utils/constants";
 import "./SavedMovies.css";
 
 function SavedMovies() {
   return (
-    <section className="savedMovies">
+    <main className=" movies movies_saved">
       <SearchForm />
-      <MoviesCardList maxVisibleCards={3} />
-    </section>
+      <MoviesCardList moviesList={moviesList.slice(0,3)} isSavedMoviesPage={true} /> {' '}
+    </main>
   );
 }
 

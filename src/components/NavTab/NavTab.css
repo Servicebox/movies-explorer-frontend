@@ -9,17 +9,22 @@
   z-index: 1;
   flex-direction: column;
   background-color: #202020;
+  gap: 622px;
 }
 .navigate__button-close {
+  cursor: pointer;
   width: 22px;
   height: 22px;
   position: absolute;
   top: 22.45px;
-  right: 22.44px;
+  right: 27.44px;
   background-color: transparent;
   border: none;
   background-position: center;
   background-image: url(../../images/close.svg);
+}
+.navigate__button-close:hover{
+  opacity: .7;
 }
 
 .navigate__text-buttons {
@@ -28,6 +33,7 @@
   gap: 28px;
   margin: 159px auto 0;
   width: 340px;
+  gap: 26px;
 }
 .navigate__text-buttons:hover{
   opacity: 0.7;
@@ -43,19 +49,20 @@
   text-align: center;
   border: none;
 }
+.navigate__button:hover {
+  opacity: 0.7;
+}
 .navigate__button_active {
   text-decoration: underline;
 }
 
 .navigate__button-profile {
   background-image: url(../../images/profile.svg);
-  position: absolute;
+  margin: 0px auto;
   left: 210px;
-  bottom: 90px;
   display: block;
   width: 100px;
   height: 32px;
- 
   background-color: transparent;
   border: none;
   background-position: center;
@@ -73,7 +80,13 @@
     display: flex;
     flex-direction: column;
     background-color: #202020;
+    gap: 445px;
     z-index: 1;
+  }
+  .navigate__text-buttons {
+    margin: 143px auto 0;
+    max-width: 250px;
+    gap: 22px;
   }
   .navigate__button-profile {
     background-image: url(../../images/profile.svg);
@@ -82,11 +95,14 @@
     background-color: transparent;
     border: none;
     background-position: center;
+    margin-bottom: 20px;
   }
 
 }
 @media screen and (max-width: 320px) {
   .navigate__button-profile {
     left: 123px;
+    margin-bottom: 20px;
+
   }
 }

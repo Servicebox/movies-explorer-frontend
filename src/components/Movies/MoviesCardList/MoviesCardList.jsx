@@ -1,17 +1,21 @@
 import React from "react";
 import "./MoviesCardList.css";
 import MoviesCard from "../MoviesCard/MoviesCard";
-import { moviesList } from "../../../utils/constants";
 
-function MoviesCardList({ maxVisibleCards }) {
-  const visibleMovies = moviesList.slice(0, maxVisibleCards);
+function MoviesCardList(props) {
 
   return (
-    <section className="moviesCardList">
-      {visibleMovies.map((movie) => {
-        return <MoviesCard movie={movie} key={movie.movieId} />;
+    <ul className="movies__list">
+      {props.moviesList.map((movie) => {
+        return (
+          <MoviesCard
+            movie={movie}
+            key={movie.movieId}
+            isSavedMoviesPage={props.isSavedMoviesPage}
+          />
+        );
       })}
-    </section>
+    </ul>
   );
 }
 export default MoviesCardList;

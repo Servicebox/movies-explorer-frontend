@@ -4,40 +4,49 @@ import { Link } from "react-router-dom";
 function Portfolio (){
   return (
     <section className="portfolio">
-    <h4 className="portfolio__title">Портфолио</h4>
+    <h3 className="portfolio__title">Портфолио</h3>
+    <ul className="portfolio__list">
+    <li className="portfolio__list-item">
+
     <Link
       className="portfolio__link"
       to="https://github.com/Servicebox/how-to-learn"
       target="_blank" rel="noopener noreferrer"
     >
-      <p className="portfolio-link__text">Статичный сайт</p>
+      <p className="portfolio__link-title">Статичный сайт</p>
       <div
-        className="about__portfolio-link_image"
+        className="portfolio__link-image"
       />
     </Link>
+    </li>
+    <li className="portfolio__list-item">
     <Link
       className="portfolio__link"
       to="https://github.com/Servicebox/russian-travel"
       target="_blank" rel="noopener noreferrer"
     >
-      <p className="portfolio-link__text">Адаптивный сайт</p>
+      <p className="portfolio__link-title">Адаптивный сайт</p>
 
       <div
-        className="about__portfolio-link_image"
+        className="portfolio__link-image"
       />
     </Link>
+    </li>
+    <li className="portfolio__list-item">
     <Link
       className="portfolio__link"
       to="https://github.com/Servicebox/react-mesto-api-full-gha"
       target="_blank" rel="noopener noreferrer"
     >
-      <p className="portfolio-link__text">Одностраничное приложение</p>
+      <p className="portfolio__link-title">Одностраничное приложение</p>
       <div
-        className="about__portfolio-link_image"
+        className="portfolio__link-image"
       />
     </Link>
+    </li>
+    </ul>
   </section>
-  )
+  );
 }
 
 export default Portfolio;

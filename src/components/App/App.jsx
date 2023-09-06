@@ -1,5 +1,6 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
+import './App.css';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Movies from "../Movies/Movies";
 import SavedMovies from "../SavedMovies/SavedMovies";
 import Profile from "../Profile/Profile";
@@ -9,8 +10,6 @@ import Header from "../Header/Header";
 import Main from "../Main/Main";
 import Footer from "../Footer/Footer";
 import NotFound from '../NotFound/NotFound';
-import Preloader from "../Movies/Preloader/Preloader";
-import './App.css';
 
 function App() {
 

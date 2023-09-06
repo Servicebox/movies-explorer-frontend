@@ -7,11 +7,14 @@ import { moviesList } from "../../utils/constants";
 
 function Movies() {
   return (
-    <section className="movies">
+    <main className="movieMain">
+      <section className="movies">
       <SearchForm />
-      <MoviesCardList moviesList={moviesList.slice(0)} />
+      <MoviesCardList moviesList={moviesList} isSavedMoviesPage={false} />
       <AddMoviesTable />
     </section>
+    </main>
+
   );
 }
 
