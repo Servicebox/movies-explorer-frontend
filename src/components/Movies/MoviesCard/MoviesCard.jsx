@@ -4,20 +4,20 @@ import "./MoviesCard.css";
 function MoviesCard(props) {
   const { movie } = props;
   return (
-    <section className="moviesCard">
-      <img className="moviesCard__photo" src={movie.image} alt={movie.name} />
-      <div className="moviesCard__about">
-        <div className="moviesCard__about_text-content">
-          <span className="moviesCard__about_text-content_type_name">
-            {movie.nameRU}
-          </span>
-          <span className="moviesCard__about_text-content_type_time">
-            {movie.duration}
-          </span>
+    <li className="movies__card">
+      <img
+        className="movies__card-image" src={movie.image} alt={movie.nameRU}
+      />
+      <div className="movies__card-about">
+        <div className="movies__card-title">
+          <h2 className="movies__card-subtitle">{movie.nameRU}</h2>
+          <span className="movies__card-time">{movie.duration}</span>
         </div>
-        <div className="moviesCard__about_checkBox"></div>
+        <button className={`movies__button ${
+          props.isSavedMoviesPage ? "movies__card-delete" : "movies__card-checkBox"
+        }`} type="button" />
       </div>
-    </section>
+    </li>
   );
 }
 

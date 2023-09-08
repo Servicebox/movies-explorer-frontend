@@ -16,9 +16,6 @@
     line-height: normal;
     letter-spacing: -0.88px;
   }
-  .techs__subtitle {
-    text-align: center;
-  }
   .section__subtitle {
     max-width: 600px;
     padding: 0;
@@ -29,11 +26,12 @@
     line-height: 58px;
     letter-spacing: -2px;
   }
+  .techs__subtitle {
+    text-align: center;
+  }
   .techs__caption {
     max-width: 460px;
     text-align: center;
-  }
-  .section__caption {
     padding: 0;
     margin: 26px auto 0;
     font-size: 14px;
@@ -41,8 +39,9 @@
     font-weight: 400;
     line-height: 20px;
     letter-spacing: -0.56px;
+
   }
-  .techs__table {
+  .techs__table-list {
     display: flex;
     margin: 100px auto 0;
     padding: 0;
@@ -50,7 +49,7 @@
     max-width: 690px;
     flex-wrap: wrap;
   }
-  .techs__table_item {
+  .techs__table {
     width: 90px;
     height: 60px;
     border-radius: 10px;
@@ -69,12 +68,12 @@
     .techs {
       padding: 90px 50px 88px;
     }
-    .section__caption {
+    .techs__caption {
       font-size: 12px;
       line-height: 18px;
       letter-spacing: -0.48px;
     }
-    .techs__table_item {
+    .techs__table {
       width: 84px;
       height: 57px;
       font-size: 12px;
@@ -82,25 +81,37 @@
       letter-spacing: -0.48px;
       list-style-type: none;
     }
-    .section__subtitle {
+    .techs__subtitle {
       margin: 80px auto 0;
     }
-    .techs__table {
+    .techs__table-list {
       margin: 83px auto 0;
     }
   }
+    
+
   
   @media screen and (max-width: 500px) {
     .techs {
       padding: 48px 18px 88px;
     }
-    .section__caption {
-      margin: 12px 0 0 0;
+    .techs__caption {
+      margin: 23px 0 0 0;
       font-size: 11px;
       line-height: 16px;
       letter-spacing: -0.48px;
     }
-    .techs__table_item {
+    .techs__subtitle {
+      text-align: center;
+      font-family: Inter;
+      font-size: 30px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: normal;
+      letter-spacing: -1.2px;
+      margin: 65px auto 0;
+    }
+    .techs__table {
       width: 84px;
       height: 57px;
       font-size: 12px;
@@ -108,18 +119,13 @@
       letter-spacing: -0.48px;
       list-style-type: none;
     }
-    .section__subtitle {
-      margin: 50px auto 0;
-      font-size: 30px;
-      letter-spacing: -1.2px;
-    }
-    .techs__table {
+    .techs__table-list {
       margin: 55px auto 0;
       flex-wrap: wrap;
       max-width: 180px;
     }
     .techs__title {
-      border-bottom: 1px solid #000;
+      border-bottom: 1px solid #DADADA;
       margin: 0 auto;
       padding-bottom: 25px;
       font-size: 18px;

@@ -2,6 +2,7 @@
   margin: 30px 0 0 0;
 }
 .addMoviesTable__button {
+  cursor: pointer;
   display: block;
   width: 320px;
   height: 36px;
@@ -18,4 +19,9 @@
 }
 .addMoviesTable__button:hover{
   opacity: .7;
+}
+@media screen and (max-width: 600px) {
+  .addMoviesTable__button {
+    width: 240px;
+  }
 }
