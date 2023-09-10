@@ -26,6 +26,10 @@
   outline: none;
   color: white;
 }
+.form__input:invalid {
+  border-color: #EE3465;
+  color: #EE3465;
+}
 .form__input:focus {
   outline: 1px solid #4285f4;
   background-color: #2f2f2f;
@@ -42,7 +46,7 @@
   display: flex;
   gap: 6px;
 }
-.form__span-error {
+.form__error {
   color: #ee3465;
   margin: 10px 0 0 0;
   font-size: 10px;
@@ -68,16 +72,23 @@
 .form__button:hover {
   opacity: 0.8;
 }
-.form__link {
+.form__button-go  {
   color: #4285f4;
   text-decoration: none;
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
+  background-color: transparent;
+  border: none;
 }
-.form__link:hover {
+.form__button-go:hover {
   opacity: 0.7;
+}
+.form__button-disable{
+  background: #F8F8F8;
+  color: #C2C2C2;
+  cursor: none;
 }
 .register__form-span-link {
   max-width: 250px;
@@ -96,6 +107,9 @@
   .form__button {
     margin: 82px 0 0 0;
   }
+  .form__button-go {
+    margin: 0;
+  }
 }
 @media screen and (max-width: 450px) {
   .form {
@@ -106,11 +120,16 @@
     margin: 168px 0 0 0;
     font-size: 12px;
   }
-  .form__link {
+  .form__button-go {
+    margin: 0;
     font-size: 12px;
   }
   .register {
     margin: 104px auto 0;
     padding: 0;
+  }
+  .form__span-link {
+    font-size: 12px;
+    margin: 14px auto 30px;
   }
 }

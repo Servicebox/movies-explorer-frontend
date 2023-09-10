@@ -8,6 +8,7 @@
   overflow: hidden;
 }
 .movies__card-image {
+  height: 151px;
   width: 270px;
 }
 .movies__card-about {
@@ -28,6 +29,7 @@
   font-style: normal;
   font-weight: 500;
   line-height: normal;
+  height: 23px;
 }
 .movies__card-time {
   color: #8b8b8b;
@@ -36,7 +38,7 @@
   font-weight: 400;
   line-height: normal;
 }
-.movies__card-checkBox {
+.movies__card-checkBox_on {
   background-image: url(../../../images/save8d.svg);
   margin: -4px;
   width: 35px;

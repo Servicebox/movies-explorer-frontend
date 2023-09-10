@@ -12,9 +12,18 @@
   .login__form-button{
     margin: 168px 0 0 0;
   }
+  .login__form-span-error{
+    margin-bottom: 120px;
+  }
   @media screen and (max-width: 768px) {
     .login__form {
       margin: 20px auto;
+    }
+    .login__form-span-link{
+      padding-bottom: 110px;
+    }
+    .login__form-span-error{
+      margin-bottom: 100px;
     }
   }
   @media screen and (max-width: 420px) {
@@ -23,7 +32,7 @@
       padding: 0;
     }
     .login__form-button {
-      margin: 255px 0 0 0;
+      margin: 125px 0 0 0;
       font-size: 12px;
     }
     .login__form-span-link {
@@ -31,5 +40,8 @@
       padding: 0;
       margin: 14px auto 0;
       max-width: 250px;
+    }
+    .login__form-span-error{
+      margin-bottom: 100px;
     }
   }

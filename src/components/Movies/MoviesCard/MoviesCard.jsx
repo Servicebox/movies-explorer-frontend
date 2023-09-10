@@ -1,12 +1,26 @@
 import React from "react";
 import "./MoviesCard.css";
 
-function MoviesCard(props) {
-  const { movie } = props;
+function MoviesCard({ movie, isSavedMoviesPage, savedMovies, onSave,onDelete}) {
+  const baseUrl = "https://api.nomoreparties.co/";
+  const imageUrl = isSavedMoviesPage ? movie.image : baseUrl + movie.image.url;
+  const isSaved =
+    !isSavedMoviesPage && savedMovies.some((item) => item.movieId === movie.id);
+  const movieButtonClassName = `movies__button movies__card-checkBox ${
+    isSaved && 'movies__card-checkBox_on'
+  }`;
+
+  function handleSaveClick() {
+    onSave(movie);
+  }
+
+  function handleDeliteClick() {
+    onDelete(movie);
+  }
   return (
-    <li className="movies__card">
+    <li className="movies__card" key={movie.id}>
       <img
-        className="movies__card-image" src={movie.image} alt={movie.nameRU}
+        className="movies__card-image" src={imageUrl} alt={movie.nameRU}
       />
       <div className="movies__card-about">
         <div className="movies__card-title">
@@ -14,8 +28,11 @@ function MoviesCard(props) {
           <span className="movies__card-time">{movie.duration}</span>
         </div>
         <button className={`movies__button ${
-          props.isSavedMoviesPage ? "movies__card-delete" : "movies__card-checkBox"
-        }`} type="button" />
+            isSavedMoviesPage ? "movies__card-delete" : movieButtonClassName
+          }`}
+          type="button"
+          onClick={!isSavedMoviesPage ? handleSaveClick : handleDeliteClick}
+        />
       </div>
     </li>
   );

@@ -22,7 +22,7 @@ function Portfolio (){
     <li className="portfolio__list-item">
     <Link
       className="portfolio__link"
-      to="https://github.com/Servicebox/russian-travel"
+      to="https://servicebox.github.io/russian-travel/"
       target="_blank" rel="noopener noreferrer"
     >
       <p className="portfolio__link-title">Адаптивный сайт</p>

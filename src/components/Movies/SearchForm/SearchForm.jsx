@@ -1,16 +1,54 @@
 import React from "react";
 import "./SearchForm.css";
 
-function SearchForm() {
+function SearchForm({
+  query,
+  setQuery,
+  isShortFilm,
+  setIsShortFilm,
+  onSearch,
+  onFilter,
+}) {
+
+  const handleInputChange = (event) => {
+    setQuery(event.target.value);
+  };
+
+  const handleShortFilmToggle = () => {
+    setIsShortFilm(!isShortFilm);
+    onFilter(query, !isShortFilm);
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    onSearch(query, isShortFilm);
+  };
+  const handleInputKeyDown = (event) => {
+    if (event.key === "Enter") {
+      handleSubmit(event);
+    }
+  };
+
   return (
     <div className="search">
-      <form className="search__form">
+      <form className="search__form" onSubmit={handleSubmit}>
       <div className="search__form-item">
-          <input className="search__form-input" placeholder="Фильм"></input>
-          <button className="search__form-button" type="button" />
+          <input className="search__form-input" placeholder="Фильм"
+          value={query}
+          onChange={handleInputChange}
+          onKeyDown={handleInputKeyDown}
+          required
+          ></input>
+          <button className="search__form-button" type="submit" />
         </div>
         <div className="search__filterCheckbox">
-        <button className="search__filterCheckbox-slider " type="button" />
+        <button className={`serach__filterCheckbox-slider ${
+              isShortFilm ? "serach__filterCheckbox-slider_on" : ""
+            }`}
+            type="button"
+            onClick={handleShortFilmToggle}
+          />
         <span className="search__filterCheckbox-span">Короткометражки</span>
         </div>
       </form>
