@@ -75,6 +75,7 @@ function Register({ handleRegister, errorMessage, isLoading }) {
           minLength={5}
           autoComplete="email"
           value={email}
+          onChange={handleChange}
           required
         ></input>
 

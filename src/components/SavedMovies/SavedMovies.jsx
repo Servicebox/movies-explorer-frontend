@@ -15,7 +15,7 @@ function SavedMovies({ movies, onDelete }) {
     if (movies.length > 0 && searchResults.length === 0) {
       setSearchResults(movies);
     }
-  }, [movies, searchResults.length]);
+  }, [movies]);
 
   const handleSearch = (newQuery, newIsShortFilm) => {
     setIsShortFilm(newIsShortFilm);

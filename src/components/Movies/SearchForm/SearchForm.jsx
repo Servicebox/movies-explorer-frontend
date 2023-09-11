@@ -43,8 +43,8 @@ function SearchForm({
           <button className="search__form-button" type="submit" />
         </div>
         <div className="search__filterCheckbox">
-        <button className={`serach__filterCheckbox-slider ${
-              isShortFilm ? "serach__filterCheckbox-slider_on" : ""
+        <button className={`search__filterCheckbox-slider ${
+              isShortFilm ? "search__filterCheckbox-slider_on" : ""
             }`}
             type="button"
             onClick={handleShortFilmToggle}

@@ -13,7 +13,7 @@ import Footer from "../Footer/Footer";
 import NotFound from '../NotFound/NotFound';
 import { api } from "../../utils/MainApi";
 import { MoviesApi } from "../../utils/MoviesApi";
-import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
+import PrivateRoute from "../PrivateRoute/PrivateRoute";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 
 function App() {
@@ -203,7 +203,7 @@ function App() {
           <Route
             path="/movies"
             element={
-              <ProtectedRoute
+              <PrivateRoute
                 element={Movies}
                 loggedIn={loggedIn}
                 currentUser={currentUser}
@@ -217,7 +217,7 @@ function App() {
           <Route
             path="/saved-movies"
             element={
-              <ProtectedRoute
+              <PrivateRoute
                 element={SavedMovies}
                 movies={savedMovies}
                 onDelete={handleDeleteMovie}
@@ -229,7 +229,7 @@ function App() {
           <Route
             path="/profile"
             element={
-              <ProtectedRoute
+              <PrivateRoute
                 element={Profile}
                 isLoading={isLoading}
                 onUpdateUser={handleUpdateUser}
