@@ -107,7 +107,7 @@ function Register({ handleRegister, errorMessage, isLoading }) {
         <span className="register__form-span-link form__span-link">
           Уже зарегистрированны?
           <button
-              className="register__form-button form__button-go"
+              className="register__form-button form__button-reg"
               type="button"
               onClick={goToLogin}
             >

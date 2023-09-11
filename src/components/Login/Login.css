@@ -1,6 +1,7 @@
 .login__form-span-link{
-    width: 290px;
+    min-width: 290px;
     padding: 0;
+    padding-bottom: 0;
   }
   .login {
     margin: 54px auto 0;
@@ -9,9 +10,7 @@
   .form_link:hover{
     opacity: .7;
   }
-  .login__form-button{
-    margin: 168px 0 0 0;
-  }
+ 
   .login__form-span-error{
     margin-bottom: 120px;
   }
@@ -30,10 +29,6 @@
     .login {
       margin: 105px 0 0;
       padding: 0;
-    }
-    .login__form-button {
-      margin: 125px 0 0 0;
-      font-size: 12px;
     }
     .login__form-span-link {
       width: 290px;
