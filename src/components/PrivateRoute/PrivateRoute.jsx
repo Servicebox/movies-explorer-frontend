@@ -1,7 +1,7 @@
 import React from "react";
 import { Navigate } from "react-router-dom";
 
-const ProtectedRoute = ({ element: Component, ...props }) => {
+const PrivateRoute = ({ element: Component, ...props }) => {
   return props.loggedIn ? (
     <Component {...props} />
   ) : (
@@ -9,4 +9,4 @@ const ProtectedRoute = ({ element: Component, ...props }) => {
   );
 };
 
-export default ProtectedRoute;
+export default PrivateRoute;

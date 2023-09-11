@@ -14,7 +14,8 @@ function Movies({ movies, savedMovies, onSave }) {
     JSON.parse(localStorage.getItem("searchResults")) || []
   );
   const hasDataInLocalStorage = localStorage.getItem("searchResults");
-  const [isLoading, setIsLoading] = useState(!hasDataInLocalStorage);
+  const [hasSearched, setHasSearched] = useState(false);
+  const [isLoading, setIsLoading] = useState(hasDataInLocalStorage);
   const [visibleCards, setVisibleCards] = useState(getInitialVisibleCards());
   const [isShortFilm, setIsShortFilm] = useState(
     localStorage.getItem("isShortFilm") === "true" || false
@@ -46,7 +47,7 @@ function Movies({ movies, savedMovies, onSave }) {
       return 5;
     }
   }
-  const handleShowMoreClick = () => {
+  const handleShownMoreClick = () => {
     const screenWidth = window.innerWidth;
     if (screenWidth >= 1280) {
       setVisibleCards((prevVisibleCards) => prevVisibleCards + 4);
@@ -88,8 +89,8 @@ function Movies({ movies, savedMovies, onSave }) {
         );
       });
     }
-
     setSearchResults(searchResults);
+    setHasSearched(true);
     localStorage.setItem("searchResults", JSON.stringify(searchResults));
     setTimeout(() => {
       setIsLoading(false);
@@ -120,6 +121,7 @@ function Movies({ movies, savedMovies, onSave }) {
     }, 800);
   };
 
+
   return (
     <main className="movieMain">
       <section className="movies">
@@ -133,11 +135,11 @@ function Movies({ movies, savedMovies, onSave }) {
         />
         {isLoading ? (
           <Preloader />
-        ) : !movies || searchResults.length === 0 ? (
-          <p className="movies__info">Нет доступных фильмов.</p>
+          ) : !movies || (hasSearched && searchResults.length === 0) ? (
+            <p className="movies__info">Нет доступных фильмов.</p>
         ) : (
           <MoviesCardList
-            moviesList={searchResults.slice(0, visibleCards)}
+          moviesList={searchResults.slice(0, visibleCards)}
             isSavedMoviesPage={false}
             savedMovies={savedMovies}
             onSave={onSave}
@@ -147,7 +149,7 @@ function Movies({ movies, savedMovies, onSave }) {
           <button
             className="addMoviesTable__button"
             type="button"
-            onClick={handleShowMoreClick}
+            onClick={handleShownMoreClick}
           >
             Еще
           </button>

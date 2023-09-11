@@ -15,7 +15,7 @@ function Header({ loggedIn }) {
 
   const { pathname } = location;
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 800);
-  const [showNavTab, setShowNavTab] = useState(false);
+  const [shownNavTab, setShownNavTab] = useState(false);
 
   useEffect(() => {
     const handleResize = () => {
@@ -29,7 +29,7 @@ function Header({ loggedIn }) {
   }, []);
 
   const closeNavTab = () => {
-    setShowNavTab(false);
+    setShownNavTab(false);
   };
 
   const classNameHeader = () => {
@@ -109,7 +109,7 @@ function Header({ loggedIn }) {
           <Navigation>
             <button
               className="navigation__button-menu"
-              onClick={() => setShowNavTab(true)}
+              onClick={() => setShownNavTab(true)}
             />
           </Navigation>
         );
@@ -157,10 +157,10 @@ function Header({ loggedIn }) {
           {navContent()}
         </div>
       </header>
-      {showNavTab && (
+      {shownNavTab && (
         <>
           <NavTab closeNavTab={closeNavTab} />
-          <Overlay isOpen={showNavTab} onClose={closeNavTab} />
+          <Overlay isOpen={shownNavTab} onClose={closeNavTab} />
         </>
       )}
     </>

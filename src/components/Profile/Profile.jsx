@@ -1,7 +1,6 @@
 import React, { useState, useContext, useEffect } from "react";
 import "./Profile.css";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext"
-import { useNavigate } from "react-router-dom";
 
 
 function Profile({
@@ -11,19 +10,13 @@ function Profile({
   successMessage,
   isFormActivated,
   setFormActivated,
+  signOut
 }) {
   useEffect(() => {
     localStorage.setItem("currentPath", "/profile");
   }, []);
-  const navigate = useNavigate();
-  const signOut = () => {
-    localStorage.removeItem("jwt");
-    localStorage.removeItem("query");
-    localStorage.removeItem("isShortFilm");
-    localStorage.removeItem("searchResults");
-    navigate("/");
-  };
   const currentUser = useContext(CurrentUserContext);
+
   const [value, setValue] = useState({
     name: currentUser.name,
     email: currentUser.email,
@@ -31,6 +24,9 @@ function Profile({
 
   const handleActivated = () => {
     setFormActivated(true);
+  };
+  const isFormValid = () => {
+    return value.name === currentUser.name && value.email === currentUser.email;
   };
 
   React.useEffect(() => {
@@ -52,8 +48,8 @@ function Profile({
     <main className="profileMain">
       <section className="profile">
       <h2 className="profile__title"> {`Привет,  ${currentUser.name}!`}</h2>
-      <form className="profile__form"onSubmit={handleSubmit} noValidate>
-        <div className="profile__form-item" id="profile__item-name">
+      <form className="profile__form" onSubmit={handleSubmit} noValidate>
+        <div className="profile__form-item" id="profile-item_name">
           <label className="profile__form-label">Имя</label>
           <input className="profile__form-input" 
           placeholder="Виталий"
@@ -104,7 +100,8 @@ function Profile({
               </button>
             )}
             {isFormActivated && (
-              <button className= {`profile__button-save ${isLoading ? 'profile__button-disable' : ''}`}
+              <button className= {`profile__button-save ${isLoading || isFormValid() ? "profile__button-disable" : ""
+            }`}
                 type="submit"
                 onClick={handleSubmit}
                 disabled={isLoading}
