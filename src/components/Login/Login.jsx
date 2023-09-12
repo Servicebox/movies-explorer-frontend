@@ -91,7 +91,7 @@ function Login({ handleLogin, errorMessage, isLoading }) {
           <span className="login__form-span-link form__span-link">
             Ещё не зарегистрированы?
             <button
-              className="login__form-button form__button-go"
+              className="login__form-button form__button-reg"
               onClick={goToRegistration}
               disabled={isLoading}
               type="button"
