@@ -12,9 +12,7 @@ function SavedMovies({ movies, onDelete }) {
   const [searchResults, setSearchResults] = useState([]);
   const [isShortFilm, setIsShortFilm] = useState(false);
   useEffect(() => {
-    if (movies.length > 0 && searchResults.length === 0) {
-      setSearchResults(movies);
-    }
+    setSearchResults(movies);
   }, [movies]);
 
   const handleSearch = (newQuery, newIsShortFilm) => {
@@ -48,10 +46,12 @@ function SavedMovies({ movies, onDelete }) {
 
     setSearchResults(filteredResults);
   };
+
   return (
-    <main className=" movies movies_saved">
+    <main className=" moviessaved">
+      <section className="movies movies_saved">
       <SearchForm
-      query={query}
+        query={query}
         setQuery={setQuery}
         isShortFilm={isShortFilm}
         setIsShortFilm={setIsShortFilm}
@@ -63,6 +63,7 @@ function SavedMovies({ movies, onDelete }) {
         isSavedMoviesPage={true}
         onDelete={onDelete}
       />{" "}
+      </section>
     </main>
   );
 }

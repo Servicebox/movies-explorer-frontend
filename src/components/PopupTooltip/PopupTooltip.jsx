@@ -2,7 +2,7 @@ import React from "react";
 import iconYes from "../../images/yes.png";
 import iconNo from "../../images/no.png";
 
-function InfoTooltip({ onClose, isOpen, isError }) {
+function PopupTooltip({ onClose, isOpen, isError }) {
   const popupClass = `popup ppopup_type_info ${isOpen ? "popup_opened" : ""}`;
 
   return (
@@ -29,4 +29,4 @@ function InfoTooltip({ onClose, isOpen, isError }) {
   );
 }
 
-export default InfoTooltip;
+export default PopupTooltip;

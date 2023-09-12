@@ -2,7 +2,7 @@ import React from "react";
 import "./NavTab.css";
 import { useLocation, useNavigate } from "react-router-dom";
 
-function NavTab({ shownNavTab, closeNavTab }) {
+function NavTab({ showNavTab, closeNavTab }) {
   const navigate = useNavigate();
   const location = useLocation();
 
