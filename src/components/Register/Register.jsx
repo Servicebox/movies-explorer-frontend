@@ -38,7 +38,17 @@ function Register({ handleRegister, errorMessage, isLoading }) {
       ...formValue,
       [name]: value,
     });
-  };
+    if (name === "email") {
+      const email = e.target;
+      const isEmailValid = /^\S+@\S+\.\S+$/.test(value.trim());
+
+      if (isEmailValid) {
+        email.classList.remove("form__input-invalid");
+      } else {
+        email.classList.add("form__input-invalid");
+      }
+    }
+};
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -61,6 +71,7 @@ function Register({ handleRegister, errorMessage, isLoading }) {
             autoComplete="name"
             value={name}
             onChange={handleChange}
+            disabled={isLoading}
             required
         ></input>
 
@@ -76,6 +87,7 @@ function Register({ handleRegister, errorMessage, isLoading }) {
           autoComplete="email"
           value={email}
           onChange={handleChange}
+          disabled={isLoading}
           required
         ></input>
 
@@ -91,6 +103,7 @@ function Register({ handleRegister, errorMessage, isLoading }) {
             autoComplete="new-password"
             value={password}
             onChange={handleChange}
+            disabled={isLoading}
             required
         ></input>
 
@@ -111,6 +124,7 @@ function Register({ handleRegister, errorMessage, isLoading }) {
               className="register__form-button form__button-reg"
               type="button"
               onClick={goToLogin}
+              disabled={isLoading}
             >
             Войти
             </button>
