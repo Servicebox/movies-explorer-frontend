@@ -1,6 +1,6 @@
 import React from "react";
-import iconPositive from "../../images/yes.png";
-import iconNegative from "../../images/no.png";
+import iconYes from "../../images/yes.png";
+import iconNo from "../../images/no.png";
 
 function InfoTooltip({ onClose, isOpen, isError }) {
   const popupClass = `popup ppopup_type_info ${isOpen ? "popup_opened" : ""}`;
@@ -15,7 +15,7 @@ function InfoTooltip({ onClose, isOpen, isError }) {
         />
         <img
           className="popup__photo-info"
-          src={isError ? iconNegative : iconPositive}
+          src={isError ? iconNo : iconYes}
           alt="Статус регистрации"
         />
         <p className="popup__copyright popup__copyright_place_info ">

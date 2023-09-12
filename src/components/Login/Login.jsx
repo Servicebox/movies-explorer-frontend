@@ -3,7 +3,6 @@ import "./Login.css";
 import { useNavigate } from "react-router-dom";
 
 function Login({ handleLogin, errorMessage, isLoading }) {
-
   const navigate = useNavigate();
   const [formValue, setFormValue] = React.useState({
     email: "",
@@ -85,7 +84,6 @@ function Login({ handleLogin, errorMessage, isLoading }) {
           <button className="login__form-button form__button-reg" 
           onClick={goToRegistration}
           type="button" to="/signup">
-          disabled={isLoading}
             Регистрация
           </button>
         </span>
