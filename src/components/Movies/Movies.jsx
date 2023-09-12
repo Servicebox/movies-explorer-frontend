@@ -4,24 +4,20 @@ import SearchForm from "./SearchForm/SearchForm";
 import MoviesCardList from "./MoviesCardList/MoviesCardList";
 import Preloader from "./Preloader/Preloader";
 
-function Movies({ movies, savedMovies, onSave, getMovies}) {
-  useEffect(() => {
-    localStorage.setItem("currentPath", "/movies");
-  }, []);
-
-  const [query, setQuery] = useState(localStorage.getItem("query") || "");
+function Movies({ movies, savedMovies, onSave, getMovies }) {
   const [searchResults, setSearchResults] = useState(
     JSON.parse(localStorage.getItem("searchResults")) || []
   );
-  const hasDataInLocalStorage = localStorage.getItem("searchResults");
+  useEffect(() => {
+    localStorage.setItem("currentPath", "/movies");
+  }, []);
+  const [query, setQuery] = useState(localStorage.getItem("query") || "");
   const [hasSearched, setHasSearched] = useState(false);
-  const [isLoading, setIsLoading] = useState(hasDataInLocalStorage);
+  const [isLoading, setIsLoading] = useState(false);
   const [visibleCards, setVisibleCards] = useState(getInitialVisibleCards());
   const [isShortFilm, setIsShortFilm] = useState(
     localStorage.getItem("isShortFilm") === "true" || false
   );
-  console.log(movies)
-  console.log(searchResults)
 
   const updateQuery = (newQuery) => {
     setQuery(newQuery);
@@ -43,10 +39,10 @@ function Movies({ movies, savedMovies, onSave, getMovies}) {
     const screenWidth = window.innerWidth;
     if (screenWidth >= 1280) {
       return 16;
-    } else if (screenWidth >= 768) {
+    } else if (screenWidth >= 769) {
       return 12;
     } else if (screenWidth >= 768) {
-        return 8;
+      return 8;
     } else {
       return 5;
     }
@@ -55,11 +51,9 @@ function Movies({ movies, savedMovies, onSave, getMovies}) {
     const screenWidth = window.innerWidth;
     if (screenWidth >= 1280) {
       setVisibleCards((prevVisibleCards) => prevVisibleCards + 4);
-    }
-    else if (screenWidth >= 769) {
+    } else if (screenWidth >= 769) {
       setVisibleCards((prevVisibleCards) => prevVisibleCards + 3);
-    }
-     else if (screenWidth >= 768) {
+    } else if (screenWidth >= 768) {
       setVisibleCards((prevVisibleCards) => prevVisibleCards + 2);
     } else {
       setVisibleCards((prevVisibleCards) => prevVisibleCards + 1);
@@ -78,7 +72,10 @@ function Movies({ movies, savedMovies, onSave, getMovies}) {
 
   const handleSearch = (query, isShortFilm) => {
     setIsLoading(true);
-    getMovies();
+
+    if (movies.length === 0) {
+      getMovies();
+      }
     let filteredMovies = movies;
     let searchResults;
 
@@ -127,8 +124,9 @@ function Movies({ movies, savedMovies, onSave, getMovies}) {
 
     setTimeout(() => {
       setIsLoading(false);
-    }, 400);
+    }, 300);
   };
+
 
 
   return (
@@ -154,7 +152,7 @@ function Movies({ movies, savedMovies, onSave, getMovies}) {
             onSave={onSave}
           />
         )}
-        {visibleCards < searchResults.length ? (
+        {visibleCards < searchResults.length || !isLoading ? (
           <button
             className="addMoviesTable__button"
             type="button"

@@ -16,7 +16,7 @@ function Header({ loggedIn }) {
 
   const { pathname } = location;
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 800);
-  const [shownNavTab, setShownNavTab] = useState(false);
+  const [showNavTab, setShowNavTab] = useState(false);
 
   useEffect(() => {
     const handleResize = () => {
@@ -30,7 +30,7 @@ function Header({ loggedIn }) {
   }, []);
 
   const closeNavTab = () => {
-    setShownNavTab(false);
+    setShowNavTab(false);
   };
 
   const classNameHeader = () => {
@@ -62,7 +62,7 @@ function Header({ loggedIn }) {
 
   const navContent = () => {
     if (pathname === "/") {
-      if (!loggedIn){
+      if (!loggedIn) {
         return (
           <Navigation>
             <Link className="navigation__link" to="/signup">
@@ -73,8 +73,7 @@ function Header({ loggedIn }) {
             </Link>
           </Navigation>
         );
-      }
-      else {
+      } else {
         return (
           <Navigation className="navigation_main">
             <ul className="navigation__movie">
@@ -114,7 +113,7 @@ function Header({ loggedIn }) {
           <Navigation>
             <button
               className="navigation__button-menu"
-              onClick={() => setShownNavTab(true)}
+              onClick={() => setShowNavTab(true)}
             />
           </Navigation>
         );
@@ -123,13 +122,26 @@ function Header({ loggedIn }) {
           <Navigation className="navigation_main">
             <ul className="navigation__movie ">
               <li className="navigation__movie-item">
-                <NavLink exact="true" activeclassname="navigation__nav-link_active" className="navigation__nav-link" to="/movies">
+                <NavLink
+                  exact="true"
+                  className={({ isActive }) =>
+                    `navigation__nav-link ${
+                      isActive ? 'navigation__nav-link_active' : ''
+                    }`
+                  }
+                  to="/movies"
+                >
                   Фильмы
                 </NavLink>
               </li>
               <li className="navigation__movie-item">
-                <NavLink exact="true" activeclassname="navigation__nav-link_active"
-                  className="navigation__nav-link"
+                <NavLink
+                  exact="true"
+                  className={({ isActive }) =>
+                    `navigation__nav-link ${
+                      isActive ? 'navigation__nav-link_active' : ''
+                    }`
+                  }
                   to="/saved-movies"
                 >
                   Сохраненные фильмы
@@ -160,15 +172,15 @@ function Header({ loggedIn }) {
       <header className={classNameHeader()}>
         <div className={classNameHeaderContainer()}>
           <Link className="header__link" to="/">
-            <img className="header__logo" alt="Логотип" src={logo} />
+            <img className="header__logo" alt="Лого" src={logo} />
           </Link>
           {navContent()}
         </div>
       </header>
-      {shownNavTab && (
+      {showNavTab && (
         <>
           <NavTab closeNavTab={closeNavTab} />
-          <Overlay isOpen={shownNavTab} onClose={closeNavTab} />
+          <Overlay isOpen={showNavTab} onClose={closeNavTab} />
         </>
       )}
     </>

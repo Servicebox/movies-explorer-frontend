@@ -48,7 +48,7 @@ function Register({ handleRegister, errorMessage, isLoading }) {
         email.classList.add("form__input-invalid");
       }
     }
-};
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -109,7 +109,7 @@ function Register({ handleRegister, errorMessage, isLoading }) {
 
 <p className="register__form-error form__error "> {errorMessage}</p>
 <button className={`register__form-button  form__button ${
-  (isLoading || isFormEmpty || !isFormValid)
+    isLoading || isFormEmpty || !isFormValid
     ? "form__button-disable"
     : ""
   }`}

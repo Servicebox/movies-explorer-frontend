@@ -28,6 +28,7 @@ function App() {
   const [loginErrorMessage, setLoginErrorMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
   const [isFormActivated, setFormActivated] = useState(false);
+  const [isPageLoading, setIsPageLoading] = useState(true);
 
   const handleRegister = ({ name, email, password }) => {
     setIsLoading(true);
@@ -89,7 +90,7 @@ function App() {
   };
 
   const checkToken = () => {
-    const jwt = localStorage.getItem("jwt");
+    const jwt = localStorage.getItem('jwt');
     if (jwt) {
       api
         .getProfile()
@@ -98,17 +99,16 @@ function App() {
             setLoggedIn(true);
             getUser();
             getSavedMovies();
-
-            const currentPath = localStorage.getItem("currentPath");
-            if (currentPath) {
-              navigate(currentPath);
-            }
           }
         })
-        .catch((err) => console.log(err));
+        .catch((err) => console.log(err))
+        .finally(() => {
+          setIsPageLoading(false);
+        });
+      return;
     }
+    setIsPageLoading(false);
   };
-
   useEffect(() => {
       checkToken();
 
@@ -207,13 +207,16 @@ function App() {
       });
   };
 
+  if (isPageLoading) {
+    return <main></main>;
+  }
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="app">
         <Header loggedIn={isloggedIn}  />
         <Routes>
-          <Route path="*" element={<NotFound />} />
+          <Route path="*" element={<NotFound  />} />
           <Route
             path="/"
             element={
