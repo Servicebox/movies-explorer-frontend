@@ -11,12 +11,12 @@ function MoviesCard({ movie, isSavedMoviesPage, savedMovies, onSave,onDelete}) {
     isSaved && 'movies__card-checkBox_on'
   }`;
 
-  function minutesToHoursAndMinutes(minutes) {
+  function MoviesCard(minutes) {
     const hours = Math.floor(minutes / 60);
     const remainingMinutes = minutes % 60;
     return `${hours} ч ${remainingMinutes} мин`;
   }
-  const formattedDuration = minutesToHoursAndMinutes(movie.duration);
+  const formatted = MoviesCard(movie.duration);
 
   function handleSaveClick() {
     onSave(movie);
@@ -33,7 +33,7 @@ function MoviesCard({ movie, isSavedMoviesPage, savedMovies, onSave,onDelete}) {
       <div className="movies__card-about">
         <div className="movies__card-title">
           <h2 className="movies__card-subtitle">{movie.nameRU}</h2>
-          <span className="movies__card-time">{formattedDuration}</span>
+          <span className="movies__card-time">{formatted}</span>
         </div>
         <button className={`movies__button ${
             isSavedMoviesPage ? "movies__card-delete" : movieButtonClassName

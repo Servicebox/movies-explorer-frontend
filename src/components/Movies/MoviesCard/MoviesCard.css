@@ -38,8 +38,19 @@
   font-weight: 400;
   line-height: normal;
 }
-.movies__card-checkBox_on {
+.movies__card-checkBox {
   background-image: url(../../../images/save8d.svg);
+  margin: -4px;
+  width: 35px;
+  background-repeat: no-repeat;
+  background-position:top;
+  background-size: contain;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+.movies__card-checkBox_on {
+  background-image: url(../../../images/save8.svg);
   margin: -4px;
   width: 35px;
   background-repeat: no-repeat;
