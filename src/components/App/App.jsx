@@ -58,6 +58,7 @@ function App() {
         if (data) {
           localStorage.setItem("jwt", data.token);
           setLoggedIn(true);
+          // eslint-disable-next-line no-undef
           checkToken();
           navigate("/movies");
         }
@@ -89,27 +90,28 @@ function App() {
       .catch((err) => console.log(err));
   };
 
-  const checkToken = () => {
-    const jwt = localStorage.getItem('jwt');
-    if (jwt) {
-      api
-        .getProfile()
-        .then((res) => {
-          if (res) {
-            setLoggedIn(true);
-            getUser();
-            getSavedMovies();
-          }
-        })
-        .catch((err) => console.log(err))
-        .finally(() => {
-          setIsPageLoading(false);
-        });
-      return;
-    }
-    setIsPageLoading(false);
-  };
+  
   useEffect(() => {
+    const checkToken = () => {
+      const jwt = localStorage.getItem('jwt');
+      if (jwt) {
+        api
+          .getProfile()
+          .then((res) => {
+            if (res) {
+              setLoggedIn(true);
+              getUser();
+              getSavedMovies();
+            }
+          })
+          .catch((err) => console.log(err))
+          .finally(() => {
+            setIsPageLoading(false);
+          });
+        return;
+      }
+      setIsPageLoading(false);
+    };
       checkToken();
 
   }, []);
