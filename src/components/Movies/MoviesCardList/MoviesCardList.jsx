@@ -8,7 +8,7 @@ function MoviesCardList({
   savedMovies,
   savedMoviesList,
   onSave,
-  onDelete
+  onDelete,
 }) {
   const moviesToRender = isSavedMoviesPage ? savedMoviesList : moviesList;
 

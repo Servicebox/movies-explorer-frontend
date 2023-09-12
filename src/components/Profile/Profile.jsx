@@ -47,9 +47,9 @@ function Profile({
   return (
     <main className="profileMain">
       <section className="profile">
-      <h2 className="profile__title"> {`Привет,  ${currentUser.name}!`}</h2>
+      <h1 className="profile__title"> {`Привет,  ${currentUser.name}!`}</h1>
       <form className="profile__form" onSubmit={handleSubmit} noValidate>
-        <div className="profile__form-item" id="profile-item_name">
+        <div className="profile__form-item" id="profile-item_one">
           <label className="profile__form-label">Имя</label>
           <input className="profile__form-input" 
           placeholder="Виталий"
@@ -100,7 +100,7 @@ function Profile({
               </button>
             )}
             {isFormActivated && (
-              <button className= {`profile__button-save ${isLoading || isFormValid() ? "profile__button-disable" : ""
+              <button className={`profile__button-save ${isLoading || isFormValid() ? "profile__button-disable" : ""
             }`}
                 type="submit"
                 onClick={handleSubmit}

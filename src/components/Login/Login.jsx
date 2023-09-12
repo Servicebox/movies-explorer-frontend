@@ -83,7 +83,7 @@ function Login({ handleLogin, errorMessage, isLoading }) {
           Ещё не зарегистрированы?
           <button className="login__form-button form__button-reg" 
           onClick={goToRegistration}
-          type="button" to="/signup">
+          type="button">
             Регистрация
           </button>
         </span>

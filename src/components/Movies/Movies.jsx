@@ -47,7 +47,7 @@ function Movies({ movies, savedMovies, onSave, getMovies }) {
       return 5;
     }
   }
-  const handleShownMoreClick = () => {
+  const handleShowMoreClick = () => {
     const screenWidth = window.innerWidth;
     if (screenWidth >= 1280) {
       setVisibleCards((prevVisibleCards) => prevVisibleCards + 4);
@@ -156,7 +156,7 @@ function Movies({ movies, savedMovies, onSave, getMovies }) {
           <button
             className="addMoviesTable__button"
             type="button"
-            onClick={handleShownMoreClick}
+            onClick={handleShowMoreClick}
           >
             Еще
           </button>

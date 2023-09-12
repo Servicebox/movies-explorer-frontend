@@ -13,7 +13,7 @@ import Footer from "../Footer/Footer";
 import NotFound from '../NotFound/NotFound';
 import { api } from "../../utils/MainApi";
 import { MoviesApi } from "../../utils/MoviesApi";
-import PrivateRoute from "../PrivateRoute/PrivateRoute";
+import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 
 function App() {
@@ -58,7 +58,6 @@ function App() {
         if (data) {
           localStorage.setItem("jwt", data.token);
           setLoggedIn(true);
-          // eslint-disable-next-line no-undef
           checkToken();
           navigate("/movies");
         }
@@ -90,28 +89,27 @@ function App() {
       .catch((err) => console.log(err));
   };
 
-  
+  const checkToken = () => {
+    const jwt = localStorage.getItem('jwt');
+    if (jwt) {
+      api
+        .getProfile()
+        .then((res) => {
+          if (res) {
+            setLoggedIn(true);
+            getUser();
+            getSavedMovies();
+          }
+        })
+        .catch((err) => console.log(err))
+        .finally(() => {
+          setIsPageLoading(false);
+        });
+      return;
+    }
+    setIsPageLoading(false);
+  };
   useEffect(() => {
-    const checkToken = () => {
-      const jwt = localStorage.getItem('jwt');
-      if (jwt) {
-        api
-          .getProfile()
-          .then((res) => {
-            if (res) {
-              setLoggedIn(true);
-              getUser();
-              getSavedMovies();
-            }
-          })
-          .catch((err) => console.log(err))
-          .finally(() => {
-            setIsPageLoading(false);
-          });
-        return;
-      }
-      setIsPageLoading(false);
-    };
       checkToken();
 
   }, []);
@@ -231,7 +229,7 @@ function App() {
           <Route
             path="/movies"
             element={
-              <PrivateRoute
+              <ProtectedRoute
                 element={Movies}
                 loggedIn={isloggedIn}
                 currentUser={currentUser}
@@ -245,7 +243,7 @@ function App() {
           <Route
             path="/saved-movies"
             element={
-              <PrivateRoute
+              <ProtectedRoute
                 element={SavedMovies}
                 movies={savedMovies}
                 onDelete={handleDeleteMovie}
@@ -258,7 +256,7 @@ function App() {
           <Route
             path="/profile"
             element={
-              <PrivateRoute
+              <ProtectedRoute
                 element={Profile}
                 isLoading={isLoading}
                 onUpdateUser={handleUpdateUser}
