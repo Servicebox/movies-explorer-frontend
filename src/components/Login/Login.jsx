@@ -54,6 +54,7 @@ function Login({ handleLogin, errorMessage, isLoading }) {
         onChange={handleChange}
         autoComplete="email"
         value={email}
+        disabled={isLoading}
         required
         ></input>
         <label className="login__form-label form__label">Пароль</label>
@@ -67,6 +68,7 @@ function Login({ handleLogin, errorMessage, isLoading }) {
         autoComplete="current-password"
         value={password}
         onChange={handleChange}
+        disabled={isLoading}
         required
         ></input>
         <span className="login__form-span-error form__error">  {errorMessage} </span>
@@ -83,6 +85,7 @@ function Login({ handleLogin, errorMessage, isLoading }) {
           <button className="login__form-button form__button-reg" 
           onClick={goToRegistration}
           type="button" to="/signup">
+          disabled={isLoading}
             Регистрация
           </button>
         </span>

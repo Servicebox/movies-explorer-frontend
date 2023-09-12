@@ -26,7 +26,7 @@
   outline: none;
   color: white;
 }
-.form__input:invalid {
+.form__input-invalid{
   border-color: #EE3465;
   color: #EE3465;
 }

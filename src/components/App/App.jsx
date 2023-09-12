@@ -19,7 +19,7 @@ import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 function App() {
   const navigate = useNavigate();
   const [currentUser, setCurrentUser] = useState({});
-  const [loggedIn, setLoggedIn] = useState(false);
+  const [isloggedIn, setLoggedIn] = useState(false);
   const [allMovies, setAllMovies] = useState([]);
   const [savedMovies, setSavedMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -30,33 +30,43 @@ function App() {
   const [isFormActivated, setFormActivated] = useState(false);
 
   const handleRegister = ({ name, email, password }) => {
+    setIsLoading(true);
     api
       .register({ name, email, password })
       .then((data) => {
         console.log(data);
-        navigate("/signin");
+        handleLogin( {email, password} )
+
       })
       .catch((err) => {
         console.log(err);
         setFormActivated(true);
         setRegisterErrorMessage(err.message);
+      })
+      .finally(() => {
+        setIsLoading(false);
       });
   };
 
 
   const handleLogin = ({ email, password }) => {
+    setIsLoading(true);
     api
       .authorize(email, password)
       .then((data) => {
         if (data) {
           localStorage.setItem("jwt", data.token);
           setLoggedIn(true);
+          checkToken();
           navigate("/movies");
         }
       })
       .catch((err) => {
         console.log(err);
         setLoginErrorMessage(err.message);
+      })
+      .finally(() => {
+        setIsLoading(false);
       });
   };
 
@@ -77,6 +87,7 @@ function App() {
       })
       .catch((err) => console.log(err));
   };
+
   const checkToken = () => {
     const jwt = localStorage.getItem("jwt");
     if (jwt) {
@@ -87,6 +98,7 @@ function App() {
             setLoggedIn(true);
             getUser();
             getSavedMovies();
+
             const currentPath = localStorage.getItem("currentPath");
             if (currentPath) {
               navigate(currentPath);
@@ -96,9 +108,22 @@ function App() {
         .catch((err) => console.log(err));
     }
   };
+
   useEffect(() => {
-    checkToken();
+      checkToken();
+
   }, []);
+
+  const handleSignOut = () => {
+    localStorage.removeItem("jwt");
+    localStorage.removeItem("query");
+    localStorage.removeItem("isShortFilm");
+    localStorage.removeItem("searchResults");
+    localStorage.removeItem("currentPath");
+    setLoggedIn(false);
+    navigate("/");
+  };
+
 
   const getMovies = () => {
     MoviesApi.getMovies()
@@ -110,9 +135,6 @@ function App() {
       });
   };
 
-  useEffect(() => {
-    getMovies();
-  }, []);
 
   const handleSaveMovie = (movie) => {
     const isSaved = savedMovies.some((item) => item.movieId === movie.id);
@@ -158,7 +180,6 @@ function App() {
       .then(() => {
         setSavedMovies((savedMovies) =>
           savedMovies.filter((item) => item._id !== movie._id)
-
         );
       })
       .catch((err) => {
@@ -186,10 +207,11 @@ function App() {
       });
   };
 
+
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="app">
-        <Header loggedIn={loggedIn} />
+        <Header loggedIn={isloggedIn}  />
         <Routes>
           <Route path="*" element={<NotFound />} />
           <Route
@@ -200,17 +222,18 @@ function App() {
               </>
             }
           />
+
           <Route
             path="/movies"
             element={
               <PrivateRoute
                 element={Movies}
-                loggedIn={loggedIn}
+                loggedIn={isloggedIn}
                 currentUser={currentUser}
                 movies={allMovies}
-                getMovies={getMovies}
                 savedMovies={savedMovies}
                 onSave={handleSaveMovie}
+                getMovies={getMovies}
               />
             }
           />
@@ -221,8 +244,9 @@ function App() {
                 element={SavedMovies}
                 movies={savedMovies}
                 onDelete={handleDeleteMovie}
-                loggedIn={loggedIn}
+                loggedIn={isloggedIn}
                 currentUser={currentUser}
+                getSavedMovies={getSavedMovies}
               />
             }
           />
@@ -237,8 +261,10 @@ function App() {
                 successMessage={successMessage}
                 isFormActivated={isFormActivated}
                 setFormActivated={setFormActivated}
-                loggedIn={loggedIn}
+                loggedIn={isloggedIn}
+                getUser={getUser}
                 currentUser={currentUser}
+                signOut= {handleSignOut}
               />
             }
           />
@@ -249,6 +275,7 @@ function App() {
                 <Login
                   handleLogin={handleLogin}
                   errorMessage={loginErrorMessage}
+                  isLoading={isLoading}
                 />
               </>
             }
@@ -260,6 +287,8 @@ function App() {
                 <Register
                   handleRegister={handleRegister}
                   errorMessage={errorRegisterMessage}
+                  setErrorMessage={setRegisterErrorMessage}
+                  isLoading={isLoading}
                 />
               </>
             }

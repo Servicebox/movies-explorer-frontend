@@ -105,7 +105,7 @@ export default class Api {
   }
 }
   export const api = new Api({
-    baseUrl: "http://localhost:3000",
+    // baseUrl: "http://localhost:3000",
     baseUrlMovie: "https://api.nomoreparties.co",
-   // baseUrl: "https://toma.nomoreparties.co",
+    baseUrl: "https://toma.nomoreparties.co",
   });

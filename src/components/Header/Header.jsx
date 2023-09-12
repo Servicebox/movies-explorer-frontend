@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { useLocation, Link } from "react-router-dom";
 import logo from "../../images/logo.svg";
 import Navigation from "../Navigation/Navigation";
+import { NavLink } from 'react-router-dom';
 import NavTab from "../NavTab/NavTab";
 import profileLogo from "../../images/profileno.svg";
 import profileMain from "../../images/main.svg"
@@ -61,7 +62,19 @@ function Header({ loggedIn }) {
 
   const navContent = () => {
     if (pathname === "/") {
-      if (loggedIn) {
+      if (!loggedIn){
+        return (
+          <Navigation>
+            <Link className="navigation__link" to="/signup">
+              Регистрация
+            </Link>
+            <Link className="navigation__button" to="/signin">
+              Войти
+            </Link>
+          </Navigation>
+        );
+      }
+      else {
         return (
           <Navigation className="navigation_main">
             <ul className="navigation__movie">
@@ -81,21 +94,13 @@ function Header({ loggedIn }) {
             </ul>
             <div className="navigation__profile">
               <Link className="navigation__nav-link" to="/profile">
-                <img className="navigation__profile-logo" alt="Иконка-профиля" src={profileMain}
+                <img
+                  className="navigation__profile-logo"
+                  alt="Иконка-профиля"
+                  src={profileMain}
                 />
               </Link>
             </div>
-          </Navigation>
-        );
-      } else {
-        return (
-          <Navigation>
-            <Link className="navigation__link" to="/signup">
-              Регистрация
-            </Link>
-            <Link className="navigation__button" to="/signin">
-              Войти
-            </Link>
           </Navigation>
         );
       }
@@ -116,24 +121,27 @@ function Header({ loggedIn }) {
       } else {
         return (
           <Navigation className="navigation_main">
-            <ul className="navigation__movie">
+            <ul className="navigation__movie ">
               <li className="navigation__movie-item">
-                <Link className="navigation__nav-link" to="/movies">
+                <NavLink exact="true" activeclassname="navigation__nav-link_active" className="navigation__nav-link" to="/movies">
                   Фильмы
-                </Link>
+                </NavLink>
               </li>
               <li className="navigation__movie-item">
-                <Link
-                  className="navigation__nav-link navigation__nav-link_active"
+                <NavLink exact="true" activeclassname="navigation__nav-link_active"
+                  className="navigation__nav-link"
                   to="/saved-movies"
                 >
                   Сохраненные фильмы
-                </Link>
+                </NavLink>
               </li>
             </ul>
             <div className="navigation__profile">
               <Link className="navigation__nav-link" to="/profile">
-                <img className="navigation__profile-logo" alt="Иконка-профиля" src={profileLogo}
+                <img
+                  className="navigation__profile-logo"
+                  alt="Иконка-профиля"
+                  src={profileLogo}
                 />
               </Link>
             </div>
