@@ -49,7 +49,7 @@ function Profile({
       <section className="profile">
         <h1 className="profile__title"> {`Привет,  ${currentUser.name}!`}</h1>
         <form className="profile__form" onSubmit={handleSubmit} noValidate>
-          <div className="profile__form-item" id="profile-item_one">
+          <div className="profile__form-item" id="profile-item_name">
             <label className="profile__form-label">Имя</label>
             <input className="profile__form-input"
               placeholder="Виталий"
@@ -84,7 +84,7 @@ function Profile({
               </p>
             )}
             {successMessage && (
-              <p className="profile__form-message form__message-ok">
+              <p className="profile__form-message form__message-okay">
                 {successMessage}
               </p>
             )}

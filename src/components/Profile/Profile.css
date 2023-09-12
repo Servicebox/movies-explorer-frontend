@@ -28,7 +28,7 @@
   gap: 147px;
   color: #fff;
 }
-#profile-item_one {
+#profile-item_name {
   border-bottom: 1px solid #424242;
 }
 .profile__form-label {
@@ -131,7 +131,7 @@
   display: block;
   color: #ee3465;
 }
-.form__message-ok {
+.form__message-okay {
   display: block;
   color: white;
 }
