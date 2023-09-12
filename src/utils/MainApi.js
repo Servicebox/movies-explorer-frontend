@@ -22,7 +22,7 @@ export default class Api {
 
   register = async ({ name, email, password }) => {
     const res = await fetch(`${this._baseUrl}/signup`, {
-      method: "POST",
+      method: "GET",
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
