@@ -39,6 +39,12 @@
   font-weight: 500;
   line-height: normal;
 }
+.profile__form-info {
+  margin: 183px auto;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
 .profile__form-input {
   margin: 0;
   width: 122px;

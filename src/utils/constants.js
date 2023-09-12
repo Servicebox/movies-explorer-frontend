@@ -1,12 +1,12 @@
 const isNameValid = formValue.name.length >= 2 && formValue.name.length <= 20;
-const isEmailValid = /^\S+@\S+\.\S+$/.test(formValue.email);
-const isPasswordValid = formValue.password.length >= 8;
+  const isEmailValid = /^\S+@\S+\.\S+$/.test(formValue.email);
+  const isPasswordValid = formValue.password.length >= 8;
 
-const isNameNotEmpty = formValue.name.trim() !== "";
-const isEmailNotEmpty = formValue.email.trim() !== "";
-const isPasswordNotEmpty = formValue.password.trim() !== "";
+  const isNameNotEmpty = formValue.name.trim() !== "";
+  const isEmailNotEmpty = formValue.email.trim() !== "";
+  const isPasswordNotEmpty = formValue.password.trim() !== "";
 
-export {isNameValid, isEmailValid, isPasswordValid, isNameNotEmpty, isEmailNotEmpty, isPasswordNotEmpty   }
+  export {isNameValid, isEmailValid, isPasswordValid, isNameNotEmpty, isEmailNotEmpty, isPasswordNotEmpty   }
 /*import image1 from "../images/1.jpg";
 import image2 from "../images/2.jpg";
 import image3 from "../images/3.jpg";
