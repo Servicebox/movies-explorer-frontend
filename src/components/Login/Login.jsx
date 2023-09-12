@@ -39,55 +39,67 @@ function Login({ handleLogin, errorMessage, isLoading }) {
     e.preventDefault();
     handleLogin({ email, password });
   };
+
   return (
     <main className="signin">
-        <section className="login">
-      <form className="login__form form"onSubmit={handleSubmit} noValidate>
-        <label className="login__form-label form__label">E-mail</label>
-        <input className="login__form-input form__input" placeholder="pochta@yandex.ru|"
-        maxLength={30}
-        minLength={5}
-        type="email"
-        name="email"
-        id="email"
-        onChange={handleChange}
-        autoComplete="email"
-        value={email}
-        disabled={isLoading}
-        required
-        ></input>
-        <label className="login__form-label form__label">Пароль</label>
-        <input className="login__form-input form__input"
-        placeholder="••••••"
-        maxLength={12}
-        minLength={8}
-        type="password"
-        name="password"
-        id="password"
-        autoComplete="current-password"
-        value={password}
-        onChange={handleChange}
-        disabled={isLoading}
-        required
-        ></input>
-        <span className="login__form-span-error form__error">  {errorMessage} </span>
-        <button className={`login__form-button form__button ${
-              isLoading || isFormEmpty || !isFormValid ? "form__button-disable" : ""
+      <section className="login">
+        <form className="login__form form" onSubmit={handleSubmit} noValidate>
+          <label className="login__form-label form__label">E-mail</label>
+          <input
+            className="login__form-input form__input"
+            placeholder="pochta@yandex.ru"
+            maxLength={30}
+            minLength={5}
+            onChange={handleChange}
+            id="email"
+            name="email"
+            type="email"
+            autoComplete="email"
+            value={email}
+            disabled={isLoading}
+            required
+          ></input>
+          <label className="login__form-label form__label">Пароль</label>
+          <input
+            className="login__form-input form__input"
+            placeholder="••••••••••••••"
+            maxLength={12}
+            minLength={8}
+            id="password"
+            name="password"
+            type="password"
+            autoComplete="current-password"
+            value={password}
+            onChange={handleChange}
+            disabled={isLoading}
+            required
+          ></input>
+          <span className="login__form-span-error form__error">
+            {errorMessage}
+          </span>
+          <button
+            className={`login__form-button form__button ${
+              isLoading || isFormEmpty || !isFormValid
+                ? "form__button-disable"
+                : ""
             }`}
             type="submit"
             disabled={isLoading || isFormEmpty || !isFormValid}
           >
             Войти
           </button>
-        <span className="login__form-span-link form__span-link">
-          Ещё не зарегистрированы?
-          <button className="login__form-button form__button-reg" 
-          onClick={goToRegistration}
-          type="button">
-            Регистрация
-          </button>
-        </span>
-      </form>
+          <span className="login__form-span-link form__span-link">
+            Ещё не зарегистрированы?
+            <button
+              className="login__form-button form__button-go"
+              onClick={goToRegistration}
+              disabled={isLoading}
+              type="button"
+            >
+              Регистрация
+            </button>
+          </span>
+        </form>
       </section>
     </main>
   );

@@ -38,6 +38,7 @@ function Register({ handleRegister, errorMessage, isLoading }) {
       ...formValue,
       [name]: value,
     });
+
     if (name === "email") {
       const email = e.target;
       const isEmailValid = /^\S+@\S+\.\S+$/.test(value.trim());
@@ -57,80 +58,76 @@ function Register({ handleRegister, errorMessage, isLoading }) {
 
   return (
     <main className="signup">
-    <section className="register">
-      <form className="register__form form" onSubmit={handleSubmit} noValidate>
-        <label className="register__form-label form__label"> Имя </label>
-        <input
-          className="register__form-input form__input"
+      <section className="register">
+        <form className="register__form form" onSubmit={handleSubmit} noValidat>
+          <label className="register__form-label form__label"> Имя </label>
+          <input className="register__form-input form__input"
             placeholder="Виталий"
-            type="text"
-            name="name"
-            id="name"
             maxLength={30}
             minLength={2}
+            type="text"
+            id="name"
+            name="name"
             autoComplete="name"
             value={name}
             onChange={handleChange}
             disabled={isLoading}
             required
-        ></input>
+          ></input>
+          <label className="register__form-label form__label ">E-mail</label>
+          <input className="register__form-input form__input"
+            placeholder="pochta@yandex.ru"
+            maxLength={30}
+            minLength={5}
+            onChange={handleChange}
+            id="email"
+            name="email"
+            type="email"
+            autoComplete="email"
+            value={email}
+            disabled={isLoading}
+            required
+          ></input>
 
-        <label className="register__form-label form__label">E-mail</label>
-        <input
-          className="register__form-input form__input"
-          placeholder="pochta@yandex.ru"
-          type="email"
-          name="email"
-          id="email"
-          maxLength={30}
-          minLength={5}
-          autoComplete="email"
-          value={email}
-          onChange={handleChange}
-          disabled={isLoading}
-          required
-        ></input>
-
-        <label className="register__form-label form__label">Пароль</label>
-        <input
-          className="register__form-input form__input"
-            placeholder="*****"
-            type="password"
-            name="password"
-            id="password"
-            maxLength={15}
+          <label className="register__form-label form__label">Пароль</label>
+          <input className="register__form-input form__input"
+            placeholder="••••••••••••••"
+            maxLength={12}
             minLength={8}
+            id="password"
+            name="password"
+            type="password"
             autoComplete="new-password"
             value={password}
             onChange={handleChange}
             disabled={isLoading}
             required
-        ></input>
-
-<p className="register__form-error form__error "> {errorMessage}</p>
-<button className={`register__form-button  form__button ${
-    isLoading || isFormEmpty || !isFormValid
-    ? "form__button-disable"
-    : ""
-  }`}
-  type="submit"
-  disabled={isLoading || isFormEmpty || !isFormValid}
->
-  Зарегистрироваться
-</button>
-        <span className="register__form-span-link form__span-link">
-          Уже зарегистрированны?
+          ></input>
+          <p className="register__form-error form__error "> {errorMessage}</p>
           <button
+            className={`register__form-button  form__button ${
+              isLoading || isFormEmpty || !isFormValid
+                ? "form__button-disable"
+                : ""
+            }`}
+            type="submit"
+            disabled={isLoading || isFormEmpty || !isFormValid}
+          >
+            Зарегистрироваться
+          </button>
+          <span className="register__form-span-link form__span-link">
+            Уже зарегистрированны?
+            <button
               className="register__form-button form__button-go"
               type="button"
               onClick={goToLogin}
               disabled={isLoading}
             >
-            Войти
+              Войти
             </button>
-        </span>
-      </form>
-    </section>
+          </span>
+        </form>
+      </section>
     </main>
   );
 }

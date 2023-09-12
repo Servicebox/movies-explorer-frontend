@@ -20,43 +20,40 @@ export default class Api {
     });
   }
 
-  register = async ({ name, email, password }) => {
-    const res = await fetch(`${this._baseUrl}/signup`, {
+  register = ({ name, email, password }) => {
+    return fetch(`${this._baseUrl}/signup`, {
       method: "POST",
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
       },
       body: JSON.stringify({ name, email, password }),
-    });
-    return this._isOk(res);
+    }).then(this._isOk);
   };
 
-  authorize = async (email, password) => {
-    const res = await fetch(`${this._baseUrl}/signin`, {
+  authorize = (email, password) => {
+    return fetch(`${this._baseUrl}/signin`, {
       method: "POST",
       headers: {
         authorization: `Bearer ${localStorage.getItem("jwt")}`,
         "Content-Type": "application/json",
       },
       body: JSON.stringify({ email, password }),
-    });
-    return this._isOk(res);
+    }).then(this._isOk);
   };
 
-  async getSavedMovies() {
-    const res = await fetch(`${this._baseUrl}/movies`, {
+  getSavedMovies() {
+    return fetch(`${this._baseUrl}/movies`, {
       method: "GET",
       headers: {
         authorization: `Bearer ${localStorage.getItem("jwt")}`,
         "Content-Type": "application/json",
       },
-    });
-    return this._getResponseData(res);
+    }).then(this._getResponseData);
   }
 
-  async saveMovie(movie) {
-    const res = await fetch(`${this._baseUrl}/movies`, {
+  saveMovie(movie) {
+    return fetch(`${this._baseUrl}/movies`, {
       method: "POST",
       headers: {
         authorization: `Bearer ${localStorage.getItem("jwt")}`,
@@ -75,8 +72,7 @@ export default class Api {
         thumbnail: this._baseUrlMovie + movie.image.formats.thumbnail.url,
         movieId: movie.id,
       }),
-    });
-    return this._getResponseData(res);
+    }).then(this._getResponseData);
   }
   deleteMovie(movieId) {
     return fetch(`${this._baseUrl}/movies/${movieId}`, {
@@ -88,29 +84,27 @@ export default class Api {
     });
   }
 
-  async getProfile() {
-    const res = await fetch(`${this._baseUrl}/users/me`, {
+  getProfile() {
+    return fetch(`${this._baseUrl}/users/me`, {
       method: "GET",
       headers: {
         authorization: `Bearer ${localStorage.getItem("jwt")}`,
         "Content-Type": "application/json",
       },
-    });
-    return this._getResponseData(res);
+    }).then(this._getResponseData);
   }
-  async udateProfile({ name, email }) {
-    const res = await fetch(`${this._baseUrl}/users/me`, {
+  udateProfile({ name, email }) {
+    return fetch(`${this._baseUrl}/users/me`, {
       method: "PATCH",
       headers: {
         authorization: `Bearer ${localStorage.getItem("jwt")}`,
         "Content-Type": "application/json",
       },
       body: JSON.stringify({ name, email }),
-    });
-    return this._isOk(res);
+    }).then(this._isOk);
   }
 }
-  export const api = new Api({
+export const api = new Api({
     // baseUrl: "http://localhost:3000",
     baseUrlMovie: "https://api.nomoreparties.co",
     baseUrl: "https://toma.nomoreparties.co",

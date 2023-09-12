@@ -10,7 +10,7 @@ function Profile({
   successMessage,
   isFormActivated,
   setFormActivated,
-  signOut
+  signOut,
 }) {
   useEffect(() => {
     localStorage.setItem("currentPath", "/profile");
@@ -47,39 +47,37 @@ function Profile({
   return (
     <main className="profileMain">
       <section className="profile">
-      <h1 className="profile__title"> {`Привет,  ${currentUser.name}!`}</h1>
-      <form className="profile__form" onSubmit={handleSubmit} noValidate>
-        <div className="profile__form-item" id="profile-item_one">
-          <label className="profile__form-label">Имя</label>
-          <input className="profile__form-input" 
-          placeholder="Виталий"
-          type="text"
-          name="name"
-          id="Username"
-          maxLength={30}
-          minLength={2}
-          value={value.name ?? ""}
-          onChange={handleChange}
-          disabled={!isFormActivated || isLoading}
-          ></input>
-        </div>
-        <div className="profile__form-item ">
-          <label className="profile__form-label">E-mail</label>
-          <input
-            className="profile__form-input"
-            placeholder="pochta@yandex.ru"
+        <h1 className="profile__title"> {`Привет,  ${currentUser.name}!`}</h1>
+        <form className="profile__form" onSubmit={handleSubmit} noValidate>
+          <div className="profile__form-item" id="profile-item_one">
+            <label className="profile__form-label">Имя</label>
+            <input className="profile__form-input"
+              placeholder="Виталий"
+              maxLength={20}
+              minLength={2}
+              type="text"
+              name="name"
+              id="Username"
+              value={value.name ?? ""}
+              onChange={handleChange}
+              disabled={!isFormActivated || isLoading}
+            ></input>
+          </div>
+          <div className="profile__form-item ">
+            <label className="profile__form-label">E-mail</label>
+            <input className="profile__form-input"
+              placeholder="pochta@yandex.ru"
+              maxLength={30}
+              minLength={5}
               type="email"
               name="email"
               id="email"
-              maxLength={30}
-              minLength={5}
               value={value.email ?? ""}
               onChange={handleChange}
               disabled={!isFormActivated || isLoading}
-              
-          ></input>
-        </div>
-        <div className="profile__form-info">
+            ></input>
+          </div>
+          <div className="profile__form-info">
             {errorMessage && (
               <p className="profile__form-message form__message-error">
                 {errorMessage}
@@ -100,8 +98,9 @@ function Profile({
               </button>
             )}
             {isFormActivated && (
-              <button className={`profile__button-save ${isLoading || isFormValid() ? "profile__button-disable" : ""
-            }`}
+              <button className={`profile__button-save ${
+                  isLoading || isFormValid() ? "profile__button-disable" : ""
+                }`}
                 type="submit"
                 onClick={handleSubmit}
                 disabled={isLoading}
