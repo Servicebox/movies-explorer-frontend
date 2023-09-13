@@ -2,7 +2,6 @@ import React, { useState, useContext, useEffect } from "react";
 import "./Profile.css";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext"
 
-
 function Profile({
   onUpdateUser,
   isLoading,

@@ -73,6 +73,15 @@ function Header({ loggedIn }) {
             </Link>
           </Navigation>
         );
+      } else if(isMobile) {
+        return (
+          <Navigation>
+            <button
+              className="navigation__button-menu"
+              onClick={() => setShownNavTab(true)}
+            />
+          </Navigation>
+        );
       } else {
         return (
           <Navigation className="navigation_main">
@@ -95,7 +104,7 @@ function Header({ loggedIn }) {
               <Link className="navigation__nav-link" to="/profile">
                 <img
                   className="navigation__profile-logo"
-                  alt="Иконка-профиля"
+                  alt="Иконка"
                   src={profileMain}
                 />
               </Link>
@@ -126,7 +135,7 @@ function Header({ loggedIn }) {
                   exact="true"
                   className={({ isActive }) =>
                     `navigation__nav-link ${
-                      isActive ? 'navigation__nav-link_active' : ''
+                      isActive ? 'navigation__nav-link_active' : ""
                     }`
                   }
                   to="/movies"
@@ -139,7 +148,7 @@ function Header({ loggedIn }) {
                   exact="true"
                   className={({ isActive }) =>
                     `navigation__nav-link ${
-                      isActive ? 'navigation__nav-link_active' : ''
+                      isActive ? 'navigation__nav-link_active' : ""
                     }`
                   }
                   to="/saved-movies"

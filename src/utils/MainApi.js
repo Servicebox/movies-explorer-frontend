@@ -1,3 +1,5 @@
+import { URL_IMAGE_BEATFILM, BASE_URL } from "../utils/constants";
+
 export default class Api {
   constructor({ baseUrl, baseUrlMovie }) {
     this._baseUrl = baseUrl;
@@ -105,7 +107,6 @@ export default class Api {
   }
 }
 export const api = new Api({
-    // baseUrl: "http://localhost:3000",
-    baseUrlMovie: "https://api.nomoreparties.co",
-    baseUrl: "https://servicebox.toma.nomoreparties.co",
-  });
+  baseUrlMovie: URL_IMAGE_BEATFILM,
+  baseUrl: BASE_URL,
+});

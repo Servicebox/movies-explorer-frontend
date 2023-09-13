@@ -15,6 +15,7 @@ import { api } from "../../utils/MainApi";
 import { MoviesApi } from "../../utils/MoviesApi";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
+import {EEROR_MOVIE_MESSAGE, ERROR_NOT_MOVIE, SECSESS_UPDATE_USER} from "../../utils/constants"
 
 function App() {
   const navigate = useNavigate();
@@ -36,8 +37,7 @@ function App() {
       .register({ name, email, password })
       .then((data) => {
         console.log(data);
-        handleLogin( {email, password} )
-
+        handleLogin({ email, password });
       })
       .catch((err) => {
         console.log(err);
@@ -49,7 +49,6 @@ function App() {
       });
   };
 
-
   const handleLogin = ({ email, password }) => {
     setIsLoading(true);
     api
@@ -58,7 +57,7 @@ function App() {
         if (data) {
           localStorage.setItem("jwt", data.token);
           setLoggedIn(true);
-          checkToken();
+          //checkToken();
           navigate("/movies");
         }
       })
@@ -89,29 +88,30 @@ function App() {
       .catch((err) => console.log(err));
   };
 
-  const checkToken = () => {
-    const jwt = localStorage.getItem('jwt');
-    if (jwt) {
-      api
-        .getProfile()
-        .then((res) => {
-          if (res) {
-            setLoggedIn(true);
-            getUser();
-            getSavedMovies();
-          }
-        })
-        .catch((err) => console.log(err))
-        .finally(() => {
-          setIsPageLoading(false);
-        });
-      return;
-    }
-    setIsPageLoading(false);
-  };
-  useEffect(() => {
-      checkToken();
 
+  useEffect(() => {
+
+    const checkToken = () => {
+      const jwt = localStorage.getItem("jwt");
+      if (jwt) {
+        api
+          .getProfile()
+          .then((res) => {
+            if (res) {
+              setLoggedIn(true);
+              getUser();
+              getSavedMovies();
+            }
+          })
+          .catch((err) => console.log(err))
+          .finally(() => {
+            setIsPageLoading(false);
+          });
+        return;
+      }
+      setIsPageLoading(false);
+    };
+    checkToken();
   }, []);
 
   const handleSignOut = () => {
@@ -124,17 +124,16 @@ function App() {
     navigate("/");
   };
 
-
   const getMovies = () => {
-    MoviesApi.getMovies()
+    return MoviesApi.getMovies()
       .then((movies) => {
         setAllMovies(movies);
+        return movies;
       })
       .catch((err) => {
         console.log(err);
       });
   };
-
 
   const handleSaveMovie = (movie) => {
     const isSaved = savedMovies.some((item) => item.movieId === movie.id);
@@ -165,12 +164,11 @@ function App() {
             );
           })
           .catch((err) => {
-            console.error("Ошибка при удалении фильма:", err);
+            console.error(EEROR_MOVIE_MESSAGE, err);
           });
       } else {
-        console.error("Не удалось найти _id фильма для удаления.");
+        console.error(ERROR_NOT_MOVIE);
       }
-
     }
   };
 
@@ -183,7 +181,7 @@ function App() {
         );
       })
       .catch((err) => {
-        console.error("Ошибка при удалении фильма:", err);
+        console.error(EEROR_MOVIE_MESSAGE, err);
       });
   }
   const handleUpdateUser = ({ name, email }) => {
@@ -193,7 +191,7 @@ function App() {
       .then((res) => {
         setCurrentUser(res);
         setFormActivated(false);
-        setSuccessMessage("Профиль успешно обновлен");
+        setSuccessMessage(SECSESS_UPDATE_USER);
         setErrorMessage("");
       })
       .catch((err) => {
@@ -214,9 +212,9 @@ function App() {
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="app">
-        <Header loggedIn={isloggedIn}  />
+        <Header loggedIn={isloggedIn} />
         <Routes>
-          <Route path="*" element={<NotFound  />} />
+          <Route path="*" element={<NotFound />} />
           <Route
             path="/"
             element={
@@ -267,7 +265,7 @@ function App() {
                 loggedIn={isloggedIn}
                 getUser={getUser}
                 currentUser={currentUser}
-                signOut= {handleSignOut}
+                signOut={handleSignOut}
               />
             }
           />

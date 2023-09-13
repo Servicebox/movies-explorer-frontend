@@ -1,12 +1,21 @@
-const isNameValid = formValue.name.length >= 2 && formValue.name.length <= 20;
-  const isEmailValid = /^\S+@\S+\.\S+$/.test(formValue.email);
-  const isPasswordValid = formValue.password.length >= 8;
+const BASE_URL = "https://servicebox.toma.nomoreparties.co";
+const URL_BEATFILM = 'https://api.nomoreparties.co/beatfilm-movies';
+const URL_IMAGE_BEATFILM = "https://api.nomoreparties.co";
 
-  const isNameNotEmpty = formValue.name.trim() !== "";
-  const isEmailNotEmpty = formValue.email.trim() !== "";
-  const isPasswordNotEmpty = formValue.password.trim() !== "";
+const EMAIL_VALID = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+const EEROR_MOVIE_MESSAGE = "Ошибка при удалении фильма:";
+const ERROR_NOT_MOVIE = "Не удалось найти фильм для удаления.";
+const SECSESS_UPDATE_USER = "Ваш профиль успешно обновлен";
 
-  export {isNameValid, isEmailValid, isPasswordValid, isNameNotEmpty, isEmailNotEmpty, isPasswordNotEmpty   }
+export{
+  EMAIL_VALID,
+  EEROR_MOVIE_MESSAGE,
+  ERROR_NOT_MOVIE,
+  SECSESS_UPDATE_USER,
+  URL_BEATFILM,
+  BASE_URL,
+  URL_IMAGE_BEATFILM
+};
 /*import image1 from "../images/1.jpg";
 import image2 from "../images/2.jpg";
 import image3 from "../images/3.jpg";

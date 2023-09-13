@@ -1,7 +1,7 @@
 import React from "react";
 import "./SearchForm.css";
 
-function SearchForm({
+function searchResult({
   query,
   setQuery,
   isShortFilm,
@@ -10,13 +10,14 @@ function SearchForm({
   onFilter,
 }) {
 
-  const handleInputChange = (event) => {
-    setQuery(event.target.value);
-  };
 
   const handleShortFilmToggle = () => {
     setIsShortFilm(!isShortFilm);
     onFilter(query, !isShortFilm);
+  };
+
+  const handleInputChange = (event) => {
+    setQuery(event.target.value);
   };
 
   const handleSubmit = (event) => {
@@ -56,4 +57,4 @@ function SearchForm({
   );
 }
 
-export default SearchForm;
+export default searchResult;

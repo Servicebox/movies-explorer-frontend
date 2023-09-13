@@ -29,4 +29,5 @@ function MoviesCardList({
     </ul>
   );
 }
+
 export default MoviesCardList;

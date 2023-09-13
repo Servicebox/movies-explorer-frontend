@@ -37,11 +37,11 @@ function Movies({ movies, savedMovies, onSave, getMovies }) {
 
   function getInitialVisibleCards() {
     const screenWidth = window.innerWidth;
-    if (screenWidth >= 1280) {
+    if (screenWidth >= 1279) {
       return 16;
-    } else if (screenWidth >= 769) {
+    } else if (screenWidth >= 1040) {
       return 12;
-    } else if (screenWidth >= 768) {
+    } else if (screenWidth >= 641) {
       return 8;
     } else {
       return 5;
@@ -49,16 +49,15 @@ function Movies({ movies, savedMovies, onSave, getMovies }) {
   }
   const handleShowMoreClick = () => {
     const screenWidth = window.innerWidth;
-    if (screenWidth >= 1280) {
+    if (screenWidth >= 1279) {
       setVisibleCards((prevVisibleCards) => prevVisibleCards + 4);
-    } else if (screenWidth >= 769) {
+    } else if (screenWidth >= 1040) {
       setVisibleCards((prevVisibleCards) => prevVisibleCards + 3);
-    } else if (screenWidth >= 768) {
-      setVisibleCards((prevVisibleCards) => prevVisibleCards + 2);
     } else {
-      setVisibleCards((prevVisibleCards) => prevVisibleCards + 1);
+      setVisibleCards((prevVisibleCards) => prevVisibleCards + 2);
     }
   };
+
   useEffect(() => {
     function handleResize() {
       setVisibleCards(getInitialVisibleCards());
@@ -70,39 +69,6 @@ function Movies({ movies, savedMovies, onSave, getMovies }) {
     };
   }, []);
 
-  const handleSearch = (query, isShortFilm) => {
-    setIsLoading(true);
-
-    if (movies.length === 0) {
-      getMovies();
-      }
-    let filteredMovies = movies;
-    let searchResults;
-
-    if (isShortFilm) {
-      filteredMovies = movies.filter((movie) => movie.duration <= 40);
-      searchResults = filteredMovies.filter((movie) => {
-        return (
-          movie.nameRU.toLowerCase().includes(query.toLowerCase()) ||
-          movie.nameEN.toLowerCase().includes(query.toLowerCase())
-        );
-      });
-    } else {
-      searchResults = movies.filter((movie) => {
-        return (
-          movie.nameRU.toLowerCase().includes(query.toLowerCase()) ||
-          movie.nameEN.toLowerCase().includes(query.toLowerCase())
-        );
-      });
-    }
-    setSearchResults(searchResults);
-    setHasSearched(true);
-    localStorage.setItem("searchResults", JSON.stringify(searchResults));
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 800);
-    return;
-  };
   const filterMovies = (query, isShortFilm) => {
     setIsLoading(true);
 
@@ -127,13 +93,48 @@ function Movies({ movies, savedMovies, onSave, getMovies }) {
     }, 300);
   };
 
+  const handleSearch = async (query, isShortFilm) => {
+    setIsLoading(true);
+    let filteredMovies = movies;
+    if (movies.length === 0) {
+      filteredMovies = await getMovies();
+    }
+    console.log(movies)
 
+    let searchResults;
+
+    if (isShortFilm) {
+      filteredMovies = movies.filter((movie) => movie.duration <= 40);
+      searchResults = filteredMovies.filter((movie) => {
+        return (
+          movie.nameRU.toLowerCase().includes(query.toLowerCase()) ||
+          movie.nameEN.toLowerCase().includes(query.toLowerCase())
+        );
+      });
+    } else {
+      searchResults = filteredMovies.filter((movie) => {
+        return (
+          movie.nameRU.toLowerCase().includes(query.toLowerCase()) ||
+          movie.nameEN.toLowerCase().includes(query.toLowerCase())
+        );
+      });
+    }
+    setSearchResults(searchResults);
+    setHasSearched(true);
+    localStorage.setItem("searchResults", JSON.stringify(searchResults));
+    setVisibleCards(getInitialVisibleCards());
+
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 800);
+    return;
+  };
 
   return (
     <main className="movieMain">
       <section className="movies">
-      <SearchForm
-      query={query}
+        <SearchForm
+          query={query}
           setQuery={updateQuery}
           isShortFilm={isShortFilm}
           setIsShortFilm={updateIsShortFilm}
@@ -142,20 +143,21 @@ function Movies({ movies, savedMovies, onSave, getMovies }) {
         />
         {isLoading ? (
           <Preloader />
-          ) : !movies || (hasSearched && searchResults.length === 0) ? (
-            <p className="movies__info">Нет доступных фильмов.</p>
+        ) : !movies || (hasSearched && searchResults.length === 0) ? (
+          <p className="movies__info">Ничего не найдено.</p>
         ) : (
           <MoviesCardList
-          moviesList={searchResults.slice(0, visibleCards)}
+            moviesList={searchResults.slice(0, visibleCards)}
             isSavedMoviesPage={false}
             savedMovies={savedMovies}
             onSave={onSave}
           />
         )}
-        {visibleCards < searchResults.length || !isLoading ? (
+        {searchResults === 0 || visibleCards < searchResults.length ? (
           <button
-            className="addMoviesTable__button"
-            type="button"
+            className={`addMoviesTable__button ${
+              isLoading ? "addMoviesTable__button_off" : ""
+            }`}
             onClick={handleShowMoreClick}
           >
             Еще
