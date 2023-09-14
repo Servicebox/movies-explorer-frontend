@@ -18,7 +18,7 @@ class Api {
     })
       .then(this._handelResponse)
       .then((movies) => {
-        return movies; 
+        return movies;
       });
   }
 }
