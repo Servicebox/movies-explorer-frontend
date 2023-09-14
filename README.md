@@ -18,3 +18,7 @@
 ## [Ссылка на FRONTEND](https:toma.nomoreparties.co)
 
 https://github.com/Servicebox/movies-explorer-frontend/pull/17#issue-1892949446
+
+
+## вторая попытка  https://github.com/Servicebox/movies-explorer-frontend/pull/18#issue-1895288560 
+pull
