@@ -2,7 +2,7 @@ const BASE_URL = "https://servicebox.toma.nomoreparties.co";
 const URL_BEATFILM = 'https://api.nomoreparties.co/beatfilm-movies';
 const URL_IMAGE_BEATFILM = "https://api.nomoreparties.co";
 
-const EMAIL_VALID = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+const EMAIL_VALID = /^\S+@\S+\.\S+$/;
 const EEROR_MOVIE_MESSAGE = "Ошибка при удалении фильма:";
 const ERROR_NOT_MOVIE = "Не удалось найти фильм для удаления.";
 const SECSESS_UPDATE_USER = "Ваш профиль успешно обновлен";

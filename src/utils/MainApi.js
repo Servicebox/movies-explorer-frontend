@@ -8,9 +8,12 @@ export default class Api {
   _getResponseData(res) {
     if (res.ok) {
       return res.json();
+    } else {
+      console.error(`Ошибка в запросе: ${res.status} - ${res.statusText}`);
+      return Promise.reject(`Ошибка в запросе: ${res.status} - ${res.statusText}`);
     }
-    return Promise.reject(`Ошибка: ${res.message}`);
   }
+  
 
   _isOk(res) {
     if (res.ok) {
@@ -35,7 +38,7 @@ export default class Api {
 
   authorize = (email, password) => {
     return fetch(`${this._baseUrl}/signin`, {
-      method: "POST",
+      method: "GET",
       headers: {
         authorization: `Bearer ${localStorage.getItem("jwt")}`,
         "Content-Type": "application/json",

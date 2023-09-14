@@ -57,7 +57,7 @@ function App() {
         if (data) {
           localStorage.setItem("jwt", data.token);
           setLoggedIn(true);
-          checkToken();
+         // checkToken();
           navigate("/movies");
         }
       })
@@ -88,27 +88,29 @@ function App() {
       .catch((err) => console.log(err));
   };
 
-  const checkToken = () => {
-    const jwt = localStorage.getItem("jwt");
-    if (jwt) {
-      api
-        .getProfile()
-        .then((res) => {
-          if (res) {
-            setLoggedIn(true);
-            getUser();
-            getSavedMovies();
-          }
-        })
-        .catch((err) => console.log(err))
-        .finally(() => {
-          setIsPageLoading(false);
-        });
-      return;
-    }
-    setIsPageLoading(false);
-  };
+
   useEffect(() => {
+    const checkToken = () => {
+      const jwt = localStorage.getItem("jwt");
+      if (jwt) {
+        api
+          .getProfile()
+          .then((res) => {
+            if (res) {
+              setLoggedIn(true);
+              getUser();
+              getSavedMovies();
+            }
+          })
+          .catch((err) => console.log(err))
+          .finally(() => {
+            setIsPageLoading(false);
+          });
+        return;
+      }
+      setIsPageLoading(false);
+    };
+
     checkToken();
   }, []);
 
@@ -122,15 +124,14 @@ function App() {
     navigate("/");
   };
 
-  const getMovies = () => {
-    return MoviesApi.getMovies()
-      .then((movies) => {
-        setAllMovies(movies);
-        return movies;
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+  const getMovies = async () => {
+    try {
+      const movies = await MoviesApi.getMovies();
+      setAllMovies(movies);
+      return movies;
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   const handleSaveMovie = (movie) => {
@@ -170,17 +171,15 @@ function App() {
     }
   };
 
-  function handleDeleteMovie(movie) {
-    return api
-      .deleteMovie(movie._id)
-      .then(() => {
-        setSavedMovies((savedMovies) =>
-          savedMovies.filter((item) => item._id !== movie._id)
-        );
-      })
-      .catch((err) => {
-        console.error(EEROR_MOVIE_MESSAGE, err);
-      });
+  async function handleDeleteMovie(movie) {
+    try {
+      await api
+        .deleteMovie(movie._id);
+      setSavedMovies((savedMovies) => savedMovies.filter((item) => item._id !== movie._id)
+      );
+    } catch (err) {
+      console.error(EEROR_MOVIE_MESSAGE, err);
+    }
   }
   const handleUpdateUser = ({ name, email }) => {
     setIsLoading(true);
