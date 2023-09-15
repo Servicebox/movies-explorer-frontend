@@ -99,7 +99,7 @@ export default class Api {
     });
     return this._getResponseData(res);
   }
-  async udateProfile({ name, email }) {
+  async updateProfile({ name, email }) {
     const res = await fetch(`${this._baseUrl}/users/me`, {
       method: "PATCH",
       headers: {
@@ -110,7 +110,7 @@ export default class Api {
     });
     return this._isOk(res);
   }
-}
+};
 export const api = new Api({
   baseUrlMovie: BASE_IMAGE_URL,
   baseUrl: BASE_MYAPI_URL,

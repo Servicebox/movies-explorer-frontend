@@ -186,7 +186,7 @@ function App() {
   const handleUpdateUser = ({ name, email }) => {
     setIsLoading(true);
     api
-      .udateProfile({ name, email })
+      .updateProfile({ name, email })
       .then((res) => {
         setCurrentUser(res);
         setFormActivated(false);
