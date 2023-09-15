@@ -1,20 +1,21 @@
-const BASE_URL = "https://servicebox.toma.nomoreparties.co";
-const URL_BEATFILM = 'https://api.nomoreparties.co/beatfilm-movies';
-const URL_IMAGE_BEATFILM = "https://api.nomoreparties.co";
+const BASE_MOVIE_URL = "https://api.nomoreparties.co/beatfilm-movies";
+const BASE_MYAPI_URL = "https://servicebox.toma.nomoreparties.co";
+const BASE_IMAGE_URL = "https://api.nomoreparties.co";
 
-const EMAIL_VALID = /^\S+@\S+\.\S+$/;
-const EEROR_MOVIE_MESSAGE = "Ошибка при удалении фильма:";
-const ERROR_NOT_MOVIE = "Не удалось найти фильм для удаления.";
-const SECSESS_UPDATE_USER = "Ваш профиль успешно обновлен";
+const SECSESS_UPDATE_PROFILE = "Профиль успешно обновлен";
+const ERROR_NOT_MOVIE = "Не удалось найти id фильма для удаления.";
+const ERROR_MOVIE = "Ошибка при удалении фильма:";
 
-export{
+const EMAIL_VALID = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+module.exports = {
   EMAIL_VALID,
-  EEROR_MOVIE_MESSAGE,
+  SECSESS_UPDATE_PROFILE,
+  BASE_MYAPI_URL,
+  BASE_IMAGE_URL,
   ERROR_NOT_MOVIE,
-  SECSESS_UPDATE_USER,
-  URL_BEATFILM,
-  BASE_URL,
-  URL_IMAGE_BEATFILM
+  ERROR_MOVIE,
+  BASE_MOVIE_URL,
 };
 /*import image1 from "../images/1.jpg";
 import image2 from "../images/2.jpg";

@@ -60,18 +60,21 @@ function Register({ handleRegister, errorMessage, isLoading }) {
   return (
     <main className="signup">
       <section className="register">
-        <form className="register__form form" onSubmit={handleSubmit} noValidate>
+        <form className="register__form form"
+          onSubmit={handleSubmit}
+          noValidate
+        >
           <label className="register__form-label form__label"> Имя </label>
           <input className="register__form-input form__input"
             placeholder="Виталий"
             maxLength={30}
             minLength={2}
-            type="text"
             id="name"
             name="name"
             autoComplete="name"
             value={name}
             onChange={handleChange}
+            type="text"
             disabled={isLoading}
             required
           ></input>
@@ -85,9 +88,10 @@ function Register({ handleRegister, errorMessage, isLoading }) {
             name="email"
             type="email"
             autoComplete="email"
+            pattern="[а-яА-ЯёЁ]+" 
+            required title="Можно использовать только кириллицу"
             value={email}
             disabled={isLoading}
-            required
           ></input>
 
           <label className="register__form-label form__label">Пароль</label>

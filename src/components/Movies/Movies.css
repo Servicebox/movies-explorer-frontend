@@ -42,6 +42,10 @@
 .addMoviesTable__button:hover {
   opacity: 0.8;
 }
+.addMoviesTable__button_off{
+  display: none;
+}
+
 .addMoviesTable {
   margin: 30px 0 0 0;
 }

@@ -1,4 +1,4 @@
-import { URL_BEATFILM } from "../utils/constants";
+import { BASE_MOVIE_URL } from "../utils/constants";
 class Api {
   constructor({ baseUrl }) {
     this._baseUrl = baseUrl;
@@ -18,11 +18,11 @@ class Api {
     })
       .then(this._handelResponse)
       .then((movies) => {
-        return movies;
+        return movies; // Возвращаем данные для дальнейшей обработки
       });
   }
 }
 
 export const MoviesApi = new Api({
-  baseUrl: URL_BEATFILM,
+  baseUrl: BASE_MOVIE_URL,
 });

@@ -43,6 +43,7 @@ function Profile({
     setFormActivated(false);
     onUpdateUser(value);
   }
+
   return (
     <main className="profileMain">
       <section className="profile">
@@ -96,8 +97,8 @@ function Profile({
                 Редактировать
               </button>
             )}
-            {isFormActivated && (
-              <button className={`profile__button-save ${
+            {isFormActivated && ( <button
+                className={`profile__button-save ${
                   isLoading || isFormValid() ? "profile__button-disable" : ""
                 }`}
                 type="submit"

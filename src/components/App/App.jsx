@@ -15,7 +15,7 @@ import { api } from "../../utils/MainApi";
 import { MoviesApi } from "../../utils/MoviesApi";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
-import {EEROR_MOVIE_MESSAGE, ERROR_NOT_MOVIE, SECSESS_UPDATE_USER} from "../../utils/constants"
+import {ERROR_MOVIE, ERROR_NOT_MOVIE, SECSESS_UPDATE_PROFILE} from "../../utils/constants"
 
 function App() {
   const navigate = useNavigate();
@@ -110,7 +110,6 @@ function App() {
       }
       setIsPageLoading(false);
     };
-
     checkToken();
   }, []);
 
@@ -124,14 +123,15 @@ function App() {
     navigate("/");
   };
 
-  const getMovies = async () => {
-    try {
-      const movies = await MoviesApi.getMovies();
-      setAllMovies(movies);
-      return movies;
-    } catch (err) {
-      console.log(err);
-    }
+  const getMovies = () => {
+    return MoviesApi.getMovies()
+      .then((movies) => {
+        setAllMovies(movies);
+        return movies;
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   const handleSaveMovie = (movie) => {
@@ -163,7 +163,7 @@ function App() {
             );
           })
           .catch((err) => {
-            console.error(EEROR_MOVIE_MESSAGE, err);
+            console.error(ERROR_MOVIE, err);
           });
       } else {
         console.error(ERROR_NOT_MOVIE);
@@ -171,15 +171,17 @@ function App() {
     }
   };
 
-  async function handleDeleteMovie(movie) {
-    try {
-      await api
-        .deleteMovie(movie._id);
-      setSavedMovies((savedMovies) => savedMovies.filter((item) => item._id !== movie._id)
-      );
-    } catch (err) {
-      console.error(EEROR_MOVIE_MESSAGE, err);
-    }
+  function handleDeleteMovie(movie) {
+    return api
+      .deleteMovie(movie._id)
+      .then(() => {
+        setSavedMovies((savedMovies) =>
+          savedMovies.filter((item) => item._id !== movie._id)
+        );
+      })
+      .catch((err) => {
+        console.error(ERROR_MOVIE, err);
+      });
   }
   const handleUpdateUser = ({ name, email }) => {
     setIsLoading(true);
@@ -188,7 +190,7 @@ function App() {
       .then((res) => {
         setCurrentUser(res);
         setFormActivated(false);
-        setSuccessMessage(SECSESS_UPDATE_USER);
+        setSuccessMessage(SECSESS_UPDATE_PROFILE);
         setErrorMessage("");
       })
       .catch((err) => {

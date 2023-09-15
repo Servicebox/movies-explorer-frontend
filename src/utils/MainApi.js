@@ -1,5 +1,4 @@
-import { URL_IMAGE_BEATFILM, BASE_URL } from "../utils/constants";
-
+import { BASE_IMAGE_URL, BASE_MYAPI_URL } from "../utils/constants";
 export default class Api {
   constructor({ baseUrl, baseUrlMovie }) {
     this._baseUrl = baseUrl;
@@ -8,12 +7,9 @@ export default class Api {
   _getResponseData(res) {
     if (res.ok) {
       return res.json();
-    } else {
-      console.error(`Ошибка в запросе: ${res.status} - ${res.statusText}`);
-      return Promise.reject(`Ошибка в запросе: ${res.status} - ${res.statusText}`);
     }
+    return Promise.reject(`Ошибка: ${res.message}`);
   }
-  
 
   _isOk(res) {
     if (res.ok) {
@@ -25,40 +21,43 @@ export default class Api {
     });
   }
 
-  register = ({ name, email, password }) => {
-    return fetch(`${this._baseUrl}/signup`, {
+  register = async ({ name, email, password }) => {
+    const res = await fetch(`${this._baseUrl}/signup`, {
       method: "POST",
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
       },
       body: JSON.stringify({ name, email, password }),
-    }).then(this._isOk);
+    });
+    return this._isOk(res);
   };
 
-  authorize = (email, password) => {
-    return fetch(`${this._baseUrl}/signin`, {
-      method: "GET",
+  authorize = async (email, password) => {
+    const res = await fetch(`${this._baseUrl}/signin`, {
+      method: "POST",
       headers: {
         authorization: `Bearer ${localStorage.getItem("jwt")}`,
         "Content-Type": "application/json",
       },
       body: JSON.stringify({ email, password }),
-    }).then(this._isOk);
+    });
+    return this._isOk(res);
   };
 
-  getSavedMovies() {
-    return fetch(`${this._baseUrl}/movies`, {
+  async getSavedMovies() {
+    const res = await fetch(`${this._baseUrl}/movies`, {
       method: "GET",
       headers: {
         authorization: `Bearer ${localStorage.getItem("jwt")}`,
         "Content-Type": "application/json",
       },
-    }).then(this._getResponseData);
+    });
+    return this._getResponseData(res);
   }
 
-  saveMovie(movie) {
-    return fetch(`${this._baseUrl}/movies`, {
+  async saveMovie(movie) {
+    const res = await fetch(`${this._baseUrl}/movies`, {
       method: "POST",
       headers: {
         authorization: `Bearer ${localStorage.getItem("jwt")}`,
@@ -77,7 +76,8 @@ export default class Api {
         thumbnail: this._baseUrlMovie + movie.image.formats.thumbnail.url,
         movieId: movie.id,
       }),
-    }).then(this._getResponseData);
+    });
+    return this._getResponseData(res);
   }
   deleteMovie(movieId) {
     return fetch(`${this._baseUrl}/movies/${movieId}`, {
@@ -89,27 +89,29 @@ export default class Api {
     });
   }
 
-  getProfile() {
-    return fetch(`${this._baseUrl}/users/me`, {
+  async getProfile() {
+    const res = await fetch(`${this._baseUrl}/users/me`, {
       method: "GET",
       headers: {
         authorization: `Bearer ${localStorage.getItem("jwt")}`,
         "Content-Type": "application/json",
       },
-    }).then(this._getResponseData);
+    });
+    return this._getResponseData(res);
   }
-  udateProfile({ name, email }) {
-    return fetch(`${this._baseUrl}/users/me`, {
+  async udateProfile({ name, email }) {
+    const res = await fetch(`${this._baseUrl}/users/me`, {
       method: "PATCH",
       headers: {
         authorization: `Bearer ${localStorage.getItem("jwt")}`,
         "Content-Type": "application/json",
       },
       body: JSON.stringify({ name, email }),
-    }).then(this._isOk);
+    });
+    return this._isOk(res);
   }
 }
 export const api = new Api({
-  baseUrlMovie: URL_IMAGE_BEATFILM,
-  baseUrl: BASE_URL,
+  baseUrlMovie: BASE_IMAGE_URL,
+  baseUrl: BASE_MYAPI_URL,
 });

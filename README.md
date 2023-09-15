@@ -14,8 +14,8 @@
 
 ![](https://camo.githubusercontent.com/4f9d20f3a284d2f6634282f61f82a62e99ee9906537dc9859decfdc9efbb51ec/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f52656163745f526f757465722d4341343234353f7374796c653d666f722d7468652d6261646765266c6f676f3d72656163742d726f75746572266c6f676f436f6c6f723d7768697465)
 
-## [Ссылка на BACKEND](https:servicebox.toma.nomoreparties.co)
-## [Ссылка на FRONTEND](https:toma.nomoreparties.co)
+## https:servicebox.toma.nomoreparties.co
+## https:toma.nomoreparties.co
 
 https://github.com/Servicebox/movies-explorer-frontend/pull/17#issue-1892949446
 

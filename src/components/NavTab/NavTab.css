@@ -9,7 +9,6 @@
   z-index: 1;
   flex-direction: column;
   background-color: #202020;
-  gap: 622px;
 }
 .navigate__button-close {
   cursor: pointer;
@@ -81,7 +80,7 @@
     display: flex;
     flex-direction: column;
     background-color: #202020;
-    gap: 445px;
+
     z-index: 1;
   }
   .navigate__text-buttons {
@@ -100,10 +99,4 @@
   }
 
 }
-@media screen and (max-width: 320px) {
-  .navigate__button-profile {
-    left: 123px;
-    margin-bottom: 20px;
 
-  }
-}

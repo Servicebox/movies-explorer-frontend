@@ -1,7 +1,7 @@
 import React from "react";
 import "./SearchForm.css";
 
-function searchResult({
+function SearchForm({
   query,
   setQuery,
   isShortFilm,
@@ -9,15 +9,13 @@ function searchResult({
   onSearch,
   onFilter,
 }) {
-
+  const handleInputChange = (event) => {
+    setQuery(event.target.value);
+  };
 
   const handleShortFilmToggle = () => {
     setIsShortFilm(!isShortFilm);
     onFilter(query, !isShortFilm);
-  };
-
-  const handleInputChange = (event) => {
-    setQuery(event.target.value);
   };
 
   const handleSubmit = (event) => {
@@ -39,6 +37,8 @@ function searchResult({
           value={query}
           onChange={handleInputChange}
           onKeyDown={handleInputKeyDown}
+          type="text"
+          autoComplete="off"
           required
           ></input>
           <button className="search__form-button" type="submit" />
@@ -57,4 +57,4 @@ function searchResult({
   );
 }
 
-export default searchResult;
+export default SearchForm;
