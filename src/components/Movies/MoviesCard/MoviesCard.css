@@ -1,3 +1,10 @@
+.cards{
+  margin: 0 auto;
+  height: 100%;
+  display: flex;
+ flex: 1 1 auto;
+flex-direction: column;
+}
 .movies__card {
   width: 270px;
   height: 218px;
@@ -7,21 +14,31 @@
   border-radius: 15px;
   overflow: hidden;
 }
-.movies__card-image {
+.card__photo {
   height: 151px;
   width: 270px;
 }
-.movies__card-about {
+.card__about {
   margin: 10px 12px 0;
   display: flex;
   gap: 24px;
   max-width: 100%;
+  
 }
-.movies__card-title {
-  width: 100%;
+.card__title {
+ 
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 500;
+  height: 23px;
+  line-height: normal;
+  margin: 0;
+}
+.card__text{
   display: flex;
   flex-direction: column;
   gap: 10px;
+  width: 100%;
 }
 .movies__card-subtitle {
   margin: 0;
@@ -31,51 +48,77 @@
   line-height: normal;
   height: 23px;
 }
-.movies__card-time {
+.card__time {
   color: #8b8b8b;
   font-size: 11px;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
 }
-.movies__card-checkBox {
+.card__like-button {
   background-image: url(../../../images/save8d.svg);
-  margin: -4px;
-  width: 35px;
+  background-color: initial;
+  background-position: top;
   background-repeat: no-repeat;
-  background-position:top;
   background-size: contain;
-  background-color: transparent;
   border: none;
   cursor: pointer;
+  margin: -63px;
+  margin-left: 226px;
+  width: 27px;
+  height: 27px;
 }
-.movies__card-checkBox_on {
+.card__like-button_active {
   background-image: url(../../../images/save8.svg);
-  margin: -4px;
-  width: 35px;
+  margin: -64px;
+  margin-left: 229px;
+  width: 27px;
+  height: 27px;
   background-repeat: no-repeat;
   background-size: contain;
   background-color: transparent;
-  background-position:top;
+  background-position: top;
   cursor: pointer;
   border: none;
   
 }
-.movies__card-checkBox:hover{
+.card__like-button:hover{
   opacity: .7;
 }
-.movies__card-delete{
+.card__like-remove{
   background-image: url(../../../images/d8.svg);
-  margin: 0;
   width: 17px;
+  height: 17px;
+  margin: -55px;
+  margin-left: 240px;
   background-repeat: no-repeat;
-  background-position:top;
+  background-position: top;
   background-size: contain;
   background-color: transparent;
   border: none;
   cursor: pointer;
 }
-.movies__card-delete:hover{
+
+.card__like-remove:hover{
+  opacity: .7;
+}
+.cards__button{
+  background-color: initial;
+    border: 2px solid #424242;
+    border-radius: 5px;
+    color: #fff;
+    cursor: pointer;
+    display: block;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 500;
+    height: 36px;
+    line-height: normal;
+    margin: 51px auto 155px;
+    text-align: center;
+    width: 320px;
+}
+.cards__button{
   opacity: .7;
 }
 
@@ -88,20 +131,31 @@
     background-color: #222;
     border-radius: 15px;
   }
-  .movies__card-image {
+  .card__photo {
     width: 339px;
     height: 190px;
   }
-  .movies__card-about {
+  .card__about {
+    display: flex;
+    gap: 24px;
     margin: 10px 12px 0;
+    max-width: 100%;
   }
-  .movies__card-delete{
+  .card__like-remove{
     width: 15px;
+    margin: -56px;
+    margin-left: 310px;
+  }
+  .card__like-button{
+    margin: -57px;
+    margin-left: 299px;
+    width: 27px;
+    height: 27px;
   }
 
 }
 @media screen and (max-width: 766px) {
-  .movies__card-image {
+  .card__photo {
     width: 270px;
     height: 168px;
   }
@@ -113,23 +167,36 @@
     background-color: #222;
     border-radius: 15px;
 
+  }
+
+.card__like-remove {
+    width: 15px;
+    margin: -53px;
+    margin-left: 244px;
+
+}
+}
+@media screen and (max-width: 640px) {
+  .movies__card {
+    height: 235px;
+    margin: 0 auto;
+    border-radius: 10px;
+    background-color: #222;
+    border-radius: 15px;
+
+  }
+  .movies__card-image {
+    width: 300px;
+    height: 168px;
   }
 
 
 }
-@media screen and (max-width: 640px) {
-  .movies__card {
-    width: 300px;
-    height: 235px;
-    margin: 0 auto;
-    border-radius: 10px;
-    background-color: #222;
-    border-radius: 15px;
-
-  }
-  .movies__card-image {
-    width: 300px;
-    height: 168px;
-  }
-
+@media screen and (max-width: 766px) {
+.card__like-button{
+  margin: -57px;
+  margin-left: 232px;
+  width: 27px;
+  height: 27px;
+}
 }

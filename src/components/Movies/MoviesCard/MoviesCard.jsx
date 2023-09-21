@@ -1,56 +1,75 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import btnRemoveMovie from "../../../images/d8.svg";
+import { converterDurationMovie } from "../../../utils/functionHelpers";
 import "./MoviesCard.css";
-import { BASE_IMAGE_URL } from "../../../utils/constants";
 
 function MoviesCard({
-  movie,
-  isSavedMoviesPage,
+  card,
+  saved,
   savedMovies,
-  onSave,
-  onDelete,
+  isSavedFilms,
+  getLikeMovie,
+  onDeleteCard,
 }) {
-  const imageUrl = isSavedMoviesPage
-    ? movie.image
-    : BASE_IMAGE_URL + movie.image.url;
-  const isSaved =
-    !isSavedMoviesPage && savedMovies.some((item) => item.movieId === movie.id);
-  const movieButtonClassName = `movies__button movies__card-checkBox ${
-    isSaved && "movies__card-checkBox_on"
-  }`;
+  const onCardClick = () => {
+    if (saved) {
+      const movieToDelete = savedMovies.find((m) => m.movieId === card.id);
+      onDeleteCard(movieToDelete);
+    } else {
+      getLikeMovie(card);
+    }
+  };
 
-  function handleSaveClick() {
-    onSave(movie);
-  }
+  const onDelete = () => {
+    onDeleteCard(card);
+  };
 
-  function handleDeliteClick() {
-    onDelete(movie);
-  }
-  function timeClock(minutes) {
-    const hours = Math.floor(minutes / 60);
-    const totalMinutes = minutes % 60;
-    return `${hours} ч ${totalMinutes} мин`;
-  }
-  const transformDuration = timeClock(movie.duration);
+  const movieLikeBtnClassName = saved
+    ? "card__like-button card__like-button_active"
+    : "card__like-button";
 
   return (
-    <li className="movies__card" key={movie.id}>
-      <Link to={movie.trailerLink} target="_blank" rel="noopener noreferrer">
-        <img className="movies__card-image" src={imageUrl} alt={movie.nameRU} />
-      </Link>
-      <div className="movies__card-about">
-        <div className="movies__card-title">
-          <h2 className="movies__card-subtitle">{movie.nameRU}</h2>
-          <span className="movies__card-time">{transformDuration}</span>
+    <li className="movies__card" key={card.id}>
+
+        <a href={card.trailerLink} target="_blank" rel="noreferrer">
+          <img
+            className="card__photo"
+            alt={card.nameRU}
+            src={
+              isSavedFilms
+                ? card.image
+                : `https://api.nomoreparties.co/${card.image.url}`
+            }
+          />
+        </a>
+  
+        <div className="card__about">
+          <div className="card__text">
+          <h2 className="card__title">{card.nameRU}</h2>
+          <span className="card__time">
+            {converterDurationMovie(card.duration)}
+          </span>
+          {isSavedFilms ? (
+          <button
+            type="button"
+            className="card__like-remove"
+            onClick={onDelete}
+          >
+            <img
+              className="card__like-remove"
+              src={btnRemoveMovie}
+              alt="крестик удаления карточки с фильмом"
+            />
+          </button>
+        ) : (
+          <button
+            className={movieLikeBtnClassName}
+            onClick={onCardClick}
+            type="button"
+          ></button>
+        )}
         </div>
-        <button
-          className={`movies__button ${
-            isSavedMoviesPage ? "movies__card-delete" : movieButtonClassName
-          }`}
-          type="button"
-          onClick={!isSavedMoviesPage ? handleSaveClick : handleDeliteClick}
-        />
-      </div>
+        </div>
     </li>
   );
 }

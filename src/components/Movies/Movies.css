@@ -6,6 +6,8 @@
   flex-direction: column;
   justify-content: center;
   max-width: 1140px;
+  min-height: 100vh;
+ 
 }
 .movies__info{
   margin: 0 auto;
