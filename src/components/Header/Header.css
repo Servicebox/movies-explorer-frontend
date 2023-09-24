@@ -78,7 +78,7 @@
 }
 
 .header__color-dark {
-  margin: 0;
+  margin: 0 20px;
   padding: 18px 0;
   background: #202020;
 }
@@ -137,7 +137,7 @@ header__color-blue{
 
 @media screen and (max-width: 1023px) {
   .header {
-    padding: 18px 30px;
+    padding: 18px 8px;
   }
 }
 @media screen and (max-width: 768px) {
@@ -156,7 +156,7 @@ header__color-blue{
 
 @media screen and (max-width: 576px) {
   .header {
-    padding: 0 14px;
+    padding: 0 18px;
   }
 
   .header__links {
