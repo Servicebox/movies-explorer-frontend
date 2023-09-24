@@ -1,135 +1,78 @@
-import React, { useState, useEffect } from "react";
-import "./Register.css";
-import { useNavigate } from "react-router-dom";
+import React from "react"
+import "../Form/Form.css"
+import Form from "../Form/Form"
+import { EMAIL_REGEX } from "../../utils/constants"
+import useForm from "../../hooks/useForm"
 
-function Register({ handleRegister, errorMessage, isLoading }) {
-  const navigate = useNavigate();
-  const [formValue, setFormValue] = React.useState({
-    name: "",
-    email: "",
-    password: "",
-  });
-  const { name, password, email } = formValue;
-  const [isFormValid, setIsFormValid] = useState(false);
-  const [isFormEmpty, setIsFormEmpty] = useState(true);
+function Register({ isLoading, getRegistrationUser }) {
+  const { enteredValues, errors, handleChangeInput, isFormValid } = useForm()
 
-  useEffect(() => {
-    const isInputValid = () => {
-      const isNameValid = name.trim().length >= 2 && name.trim().length <= 20;
-      const isEmailValid = /^\S+@\S+\.\S+$/.test(email.trim());
-      const isPasswordValid = password.trim().length >= 8;
-
-      return isNameValid && isEmailValid && isPasswordValid;
-    };
-
-    setIsFormValid(isInputValid());
-    setIsFormEmpty(
-      name.trim() === "" || email.trim() === "" || password.trim() === ""
-    );
-  }, [name, email, password]);
-
-  const goToLogin = () => {
-    navigate("/signin");
-  };
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormValue({
-      ...formValue,
-      [name]: value,
-    });
-
-    if (name === "email") {
-      const email = e.target;
-      const isEmailValid = /^\S+@\S+\.\S+$/.test(value.trim());
-
-      if (isEmailValid) {
-        email.classList.remove("form__input-invalid");
-      } else {
-        email.classList.add("form__input-invalid");
-      }
-    }
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    handleRegister({ name, password, email });
-  };
+  function editProfileInfo(e) {
+    e.preventDefault()
+    getRegistrationUser({
+      name: enteredValues.name,
+      email: enteredValues.email,
+      password: enteredValues.password,
+    })
+  }
 
   return (
-    <main className="signup">
-      <section className="register">
-        <form className="register__form form" onSubmit={handleSubmit} noValidat>
-          <label className="register__form-label form__label"> Имя </label>
-          <input className="register__form-input form__input"
-            placeholder="Виталий"
-            maxLength={30}
-            minLength={2}
-            type="text"
-            id="name"
-            name="name"
-            autoComplete="name"
-            value={name}
-            onChange={handleChange}
-            disabled={isLoading}
-            required
-          ></input>
-          <label className="register__form-label form__label ">E-mail</label>
-          <input className="register__form-input form__input"
-            placeholder="pochta@yandex.ru"
-            maxLength={30}
-            minLength={5}
-            onChange={handleChange}
-            id="email"
-            name="email"
-            type="email"
-            autoComplete="email"
-            value={email}
-            disabled={isLoading}
-            required
-          ></input>
-
-          <label className="register__form-label form__label">Пароль</label>
-          <input className="register__form-input form__input"
-            placeholder="••••••••••••••"
-            maxLength={12}
-            minLength={8}
-            id="password"
-            name="password"
-            type="password"
-            autoComplete="new-password"
-            value={password}
-            onChange={handleChange}
-            disabled={isLoading}
-            required
-          ></input>
-          <p className="register__form-error form__error "> {errorMessage}</p>
-          <button
-            className={`register__form-button  form__button ${
-              isLoading || isFormEmpty || !isFormValid
-                ? "form__button-disable"
-                : ""
-            }`}
-            type="submit"
-            disabled={isLoading || isFormEmpty || !isFormValid}
-          >
-            Зарегистрироваться
-          </button>
-          <span className="register__form-span-link form__span-link">
-            Уже зарегистрированны?
-            <button
-              className="register__form-button form__button-reg"
-              type="button"
-              onClick={goToLogin}
-              disabled={isLoading}
-            >
-              Войти
-            </button>
-          </span>
-        </form>
-      </section>
-    </main>
-  );
+    <Form
+      title="Добро пожаловать!"
+      buttonText="Зарегистрироваться"
+      registrationPrompt="Уже зарегистрированы?"
+      linkText=" Войти"
+      link="/signin"
+      onSubmit={editProfileInfo}
+      isLoading={isLoading}
+      isDisabledButton={!isFormValid}
+    >
+      <label className="form__label">
+        Имя
+        <input
+          name="name"
+          className="form__input"
+          type="text"
+          minLength="2"
+          maxLength="40"
+          value={enteredValues.name || ""}
+          onChange={handleChangeInput}
+          placeholder="Виталий"
+          required
+        />
+        <span className="form__input-error">{errors.name}</span>
+      </label>
+      <label className="form__label">
+        E-mail
+        <input
+          name="email"
+          className="form__input"
+          type="email"
+          value={enteredValues.email || ""}
+          onChange={handleChangeInput}
+          pattern={EMAIL_REGEX}
+          placeholder="yandex@yandex.ru"
+          required
+        />
+        <span className="form__input-error">{errors.email}</span>
+      </label>
+      <label className="form__label">
+        Пароль
+        <input
+          name="password"
+          className="form__input form__input-data_error"
+          type="password"
+          value={enteredValues.password || ""}
+          onChange={handleChangeInput}
+          placeholder="********"
+          minLength="6"
+          maxLength="16"
+          required
+        />
+        <span className="form__input-error">{errors.password}</span>
+      </label>
+    </Form>
+  )
 }
 
-export default Register;
+export default Register

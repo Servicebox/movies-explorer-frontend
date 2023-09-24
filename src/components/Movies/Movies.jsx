@@ -1,168 +1,113 @@
 import React, { useState, useEffect } from "react";
 import "./Movies.css";
-import SearchForm from "./SearchForm/SearchForm";
+import SearchForm from "../SearchForm/SearchForm";
 import MoviesCardList from "./MoviesCardList/MoviesCardList";
-import Preloader from "./Preloader/Preloader";
+import Footer from "../Footer/Footer";
+import Header from "../Header/Header";
+import { filterMovies, counterDurationMovie } from "../../utils/functionHelpers.js";
+import * as movies from "../../utils/MoviesApi.js";
 
-function Movies({ movies, savedMovies, onSave, getMovies }) {
-  const [searchResults, setSearchResults] = useState(
-    JSON.parse(localStorage.getItem("searchResults")) || []
-  );
-  useEffect(() => {
-    localStorage.setItem("currentPath", "/movies");
-  }, []);
-  const [query, setQuery] = useState(localStorage.getItem("query") || "");
-  const [hasSearched, setHasSearched] = useState(false);
+function Movies({ loggedIn, savedMovies, getLikeMovie, onDeleteCard }) {
   const [isLoading, setIsLoading] = useState(false);
-  const [visibleCards, setVisibleCards] = useState(getInitialVisibleCards());
-  const [isShortFilm, setIsShortFilm] = useState(
-    localStorage.getItem("isShortFilm") === "true" || false
-  );
+  const [filteredMovies, setFilteredMovies] = useState([]);
+  const [initialCardsMovies, setInitialCardsMovies] = useState([]);
+  const [isShortMovies, setisShortMovies] = useState(false);
+  const [isReqError, setisReqError] = useState(false);
+  const [isNotFound, setIsNotFound] = useState(false);
 
-  const updateQuery = (newQuery) => {
-    setQuery(newQuery);
-  };
-
-  const updateIsShortFilm = (newValue) => {
-    setIsShortFilm(newValue);
-  };
-
-  useEffect(() => {
-    localStorage.setItem("query", query);
-  }, [query]);
-
-  useEffect(() => {
-    localStorage.setItem("isShortFilm", isShortFilm);
-  }, [isShortFilm]);
-
-  function getInitialVisibleCards() {
-    const screenWidth = window.innerWidth;
-    if (screenWidth >= 1280) {
-      return 16;
-    } else if (screenWidth >= 769) {
-      return 12;
-    } else if (screenWidth >= 768) {
-      return 8;
+  /** поиск фильмов */
+  function searchMovies(query) {
+    localStorage.setItem("movieSearch", query);
+    localStorage.setItem("shortMovies", isShortMovies);
+    if (localStorage.getItem("allMovies")) {
+      const movies = JSON.parse(localStorage.getItem("allMovies"));
+      handleFilterMovie(movies, query, isShortMovies);
     } else {
-      return 5;
+      setIsLoading(true);
+      movies
+        .getMovies()
+        .then((cardsSavedFilms) => {
+          handleFilterMovie(cardsSavedFilms, query, isShortMovies);
+          setisReqError(false);
+        })
+        .catch((error) => {
+          setisReqError(true);
+          console.log(error);
+        })
+        .finally(() => {
+          setIsLoading(false);
+        });
     }
   }
-  const handleShowMoreClick = () => {
-    const screenWidth = window.innerWidth;
-    if (screenWidth >= 1280) {
-      setVisibleCards((prevVisibleCards) => prevVisibleCards + 4);
-    } else if (screenWidth >= 769) {
-      setVisibleCards((prevVisibleCards) => prevVisibleCards + 3);
-    } else if (screenWidth >= 768) {
-      setVisibleCards((prevVisibleCards) => prevVisibleCards + 2);
-    } else {
-      setVisibleCards((prevVisibleCards) => prevVisibleCards + 1);
-    }
-  };
-  useEffect(() => {
-    function handleResize() {
-      setVisibleCards(getInitialVisibleCards());
-    }
 
-    window.addEventListener("resize", handleResize);
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
+  function shortMoviesToggle() {
+    setisShortMovies(!isShortMovies);
+    if (!isShortMovies) {
+      const filteredCardsMovies = counterDurationMovie(initialCardsMovies);
+      setFilteredMovies(filteredCardsMovies);
+    } else {
+      setFilteredMovies(initialCardsMovies);
+    }
+    localStorage.setItem("shortMovies", !isShortMovies);
+  }
+
+  // Функция фильтрации фильмов
+  function handleFilterMovie(movies, query, short) {
+    const moviesFilmList = filterMovies(movies, query);
+    setInitialCardsMovies(moviesFilmList);
+    setFilteredMovies(
+      short ? counterDurationMovie(moviesFilmList) : moviesFilmList
+    );
+    localStorage.setItem("movies", JSON.stringify(moviesFilmList));
+    localStorage.setItem("allMovies", JSON.stringify(movies));
+  }
+
+  // Получение короткометражных фильмов
+  useEffect(() => {
+    setisShortMovies(localStorage.getItem("shortMovies") === "true");
   }, []);
 
-  const handleSearch = (query, isShortFilm) => {
-    setIsLoading(true);
-
-    if (movies.length === 0) {
-      getMovies();
+  // Получение фильмов из localStorage
+  useEffect(() => {
+    if (localStorage.getItem("movies")) {
+      const movies = JSON.parse(localStorage.getItem("movies"));
+      setInitialCardsMovies(movies);
+      if (localStorage.getItem("shortMovies") === "true") {
+        setFilteredMovies(counterDurationMovie(movies));
+      } else {
+        setFilteredMovies(movies);
       }
-    let filteredMovies = movies;
-    let searchResults;
+    }
+  }, []);
 
-    if (isShortFilm) {
-      filteredMovies = movies.filter((movie) => movie.duration <= 40);
-      searchResults = filteredMovies.filter((movie) => {
-        return (
-          movie.nameRU.toLowerCase().includes(query.toLowerCase()) ||
-          movie.nameEN.toLowerCase().includes(query.toLowerCase())
-        );
-      });
+  useEffect(() => {
+    if (localStorage.getItem("movieSearch")) {
+      setIsNotFound(filteredMovies.length === 0);
     } else {
-      searchResults = movies.filter((movie) => {
-        return (
-          movie.nameRU.toLowerCase().includes(query.toLowerCase()) ||
-          movie.nameEN.toLowerCase().includes(query.toLowerCase())
-        );
-      });
+      setIsNotFound(false);
     }
-    setSearchResults(searchResults);
-    setHasSearched(true);
-    localStorage.setItem("searchResults", JSON.stringify(searchResults));
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 800);
-    return;
-  };
-  const filterMovies = (query, isShortFilm) => {
-    setIsLoading(true);
-
-    let filteredMovies = movies;
-
-    if (isShortFilm) {
-      filteredMovies = filteredMovies.filter((movie) => movie.duration <= 40);
-    }
-
-    const filteredResults = filteredMovies.filter((movie) => {
-      return (
-        movie.nameRU.toLowerCase().includes(query.toLowerCase()) ||
-        movie.nameEN.toLowerCase().includes(query.toLowerCase())
-      );
-    });
-
-    setSearchResults(filteredResults);
-    localStorage.setItem("searchResults", JSON.stringify(filteredResults));
-
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 300);
-  };
-
-
+  }, [filteredMovies]);
 
   return (
-    <main className="movieMain">
-      <section className="movies">
+    <section className="movies">
+      <Header loggedIn={loggedIn} />
       <SearchForm
-      query={query}
-          setQuery={updateQuery}
-          isShortFilm={isShortFilm}
-          setIsShortFilm={updateIsShortFilm}
-          onSearch={handleSearch}
-          onFilter={filterMovies}
-        />
-        {isLoading ? (
-          <Preloader />
-          ) : !movies || (hasSearched && searchResults.length === 0) ? (
-            <p className="movies__info">Нет доступных фильмов.</p>
-        ) : (
-          <MoviesCardList
-          moviesList={searchResults.slice(0, visibleCards)}
-            isSavedMoviesPage={false}
-            savedMovies={savedMovies}
-            onSave={onSave}
-          />
-        )}
-        {visibleCards < searchResults.length || !isLoading ? (
-          <button
-            className="addMoviesTable__button"
-            type="button"
-            onClick={handleShowMoreClick}
-          >
-            Еще
-          </button>
-        ) : null}
-      </section>
-    </main>
+        isShortMovies={isShortMovies}
+        onFilterMovies={shortMoviesToggle}
+        getSearchMovies={searchMovies} // Передаем функцию searchMovies в качестве пропса getSearchMovies
+      />
+      <MoviesCardList
+        cards={filteredMovies}
+        isLoading={isLoading}
+        isSavedFilms={false}
+        savedMovies={savedMovies}
+        isReqError={isReqError}
+        getLikeMovie={getLikeMovie}
+        onDeleteCard={onDeleteCard}
+        isNotFound={isNotFound}
+      />
+      <Footer />
+    </section>
   );
 }
 

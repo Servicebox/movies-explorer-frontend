@@ -1,190 +1,84 @@
-import "./Header.css";
-import React, { useState, useEffect } from "react";
-import { useLocation, Link } from "react-router-dom";
-import logo from "../../images/logo.svg";
-import Navigation from "../Navigation/Navigation";
-import { NavLink } from 'react-router-dom';
-import NavTab from "../NavTab/NavTab";
-import profileLogo from "../../images/profileno.svg";
-import profileMain from "../../images/main.svg"
-import Overlay from "../Overlay/Overlay";
+import React from "react"
+import { Link, NavLink, useLocation } from "react-router-dom"
+import mobileMenu from "../../images/burger.svg"
+import headerLogo from "../../images/logo.svg"
+import Navigation from "../Navigation/Navigation"
+import "./Header.css"
+import profileMenu from "../../images/profile.svg"
+import handleOpenMobileMenu from "../../images/burgermini.svg"
 
 function Header({ loggedIn }) {
-  const location = useLocation();
-  let className = "header";
-  let classNameContainer = "header__container";
+  const [isClicked, setIsClicked] = React.useState(false)
+  const location = useLocation()
 
-  const { pathname } = location;
-  const [isMobile, setIsMobile] = useState(window.innerWidth <= 800);
-  const [shownNavTab, setShownNavTab] = useState(false);
+  function handleOpenMobileMenu() {
+    setIsClicked(true)
+  }
 
-  useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth <= 768);
-    };
+  function handleCloseMobileMenu() {
+    setIsClicked(false)
+  }
 
-    window.addEventListener("resize", handleResize);
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
+  const activeColorHeaderLink = ({ isActive }) =>
+    isActive ? "header__button_active" : "header__button"
 
-  const closeNavTab = () => {
-    setShownNavTab(false);
-  };
-
-  const classNameHeader = () => {
-    if (pathname === "/") {
-      className = `${className} header_main`;
-    } else if (
-      pathname === "/movies" ||
-      pathname === "/saved-movies" ||
-      pathname === "/profile"
-    ) {
-      className = `${className} header_movie`;
-    } else if (pathname === "/signin") {
-      className = `${className} header_login`;
-    } else if (pathname === "/signup") {
-      className = `${className} header_login`;
-    }
-    return className;
-  };
-  const classNameHeaderContainer = () => {
-    if (pathname === "/signin") {
-      className = `${classNameContainer} header_container-sign`;
-    } else if (pathname === "/signup") {
-      className = `${classNameContainer} header_container-sign`;
-    } else {
-      className = `${classNameContainer} `;
-    }
-    return className;
-  };
-
-  const navContent = () => {
-    if (pathname === "/") {
-      if (!loggedIn) {
-        return (
-          <Navigation>
-            <Link className="navigation__link" to="/signup">
-              Регистрация
-            </Link>
-            <Link className="navigation__button" to="/signin">
-              Войти
-            </Link>
-          </Navigation>
-        );
-      } else {
-        return (
-          <Navigation className="navigation_main">
-            <ul className="navigation__movie">
-              <li className="navigation__movie-item">
-                <Link className="navigation__nav-link" to="/movies">
-                  Фильмы
-                </Link>
-              </li>
-              <li className="navigation__movie-item">
-                <Link
-                  className="navigation__nav-link navigation__nav-link_active"
-                  to="/saved-movies"
-                >
-                  Сохраненные фильмы
-                </Link>
-              </li>
-            </ul>
-            <div className="navigation__profile">
-              <Link className="navigation__nav-link" to="/profile">
-                <img
-                  className="navigation__profile-logo"
-                  alt="Иконка-профиля"
-                  src={profileMain}
-                />
-              </Link>
-            </div>
-          </Navigation>
-        );
-      }
-    } else if (
-      pathname === "/movies" ||
-      pathname === "/saved-movies" ||
-      pathname === "/profile"
-    ) {
-      if (isMobile) {
-        return (
-          <Navigation>
-            <button
-              className="navigation__button-menu"
-              onClick={() => setShownNavTab(true)}
-            />
-          </Navigation>
-        );
-      } else {
-        return (
-          <Navigation className="navigation_main">
-            <ul className="navigation__movie ">
-              <li className="navigation__movie-item">
-                <NavLink
-                  exact="true"
-                  className={({ isActive }) =>
-                    `navigation__nav-link ${
-                      isActive ? 'navigation__nav-link_active' : ''
-                    }`
-                  }
-                  to="/movies"
-                >
-                  Фильмы
-                </NavLink>
-              </li>
-              <li className="navigation__movie-item">
-                <NavLink
-                  exact="true"
-                  className={({ isActive }) =>
-                    `navigation__nav-link ${
-                      isActive ? 'navigation__nav-link_active' : ''
-                    }`
-                  }
-                  to="/saved-movies"
-                >
-                  Сохраненные фильмы
-                </NavLink>
-              </li>
-            </ul>
-            <div className="navigation__profile">
-              <Link className="navigation__nav-link" to="/profile">
-                <img
-                  className="navigation__profile-logo"
-                  alt="Иконка"
-                  src={profileLogo}
-                />
-              </Link>
-            </div>
-          </Navigation>
-        );
-      }
-    } else if (pathname === "/signin") {
-      return <h1 className="header__title">Рады видеть!</h1>;
-    } else if (pathname === "/signup") {
-      return <h1 className="header__title">Добро пожаловать!</h1>;
-    }
-  };
+  const isHomePage = location.pathname === "/"
 
   return (
     <>
-      <header className={classNameHeader()}>
-        <div className={classNameHeaderContainer()}>
-          <Link className="header__link" to="/">
-            <img className="header__logo" alt="Лого" src={logo} />
+      {!loggedIn ? (
+        <header className="header" id="header">
+          <Link to="/" className="form__logo">
+            <img src={headerLogo} alt="Логотип сайта" />
           </Link>
-          {navContent()}
-        </div>
-      </header>
-      {shownNavTab && (
-        <>
-          <NavTab closeNavTab={closeNavTab} />
-          <Overlay isOpen={shownNavTab} onClose={closeNavTab} />
-        </>
+          <div className="header__links">
+            <Link to="/signup" className="header__button">
+              Регистрация
+            </Link>
+            <Link to="/signin" className="header__button-in">
+              Войти
+            </Link>
+          </div>
+        </header>
+      ) : (
+        <header className={`header ${isHomePage ? "header__color-blue" : "header__color-dark"}`}>
+          <Link to="/" className="form__logo">
+            <img src={headerLogo} alt="Логотип" />
+          </Link>
+          <div className="header__links header__links_films">
+            <NavLink to="/movies" className={activeColorHeaderLink}>
+              Фильмы
+            </NavLink>
+
+            <NavLink to="/saved-movies" className={activeColorHeaderLink}>
+              Сохранённые фильмы
+            </NavLink>
+          </div>
+          <div className="header__links">
+            <Link to="/profile" className="header__account-btn">
+              <img 
+              src={profileMenu}
+              alt="аккаунт" />
+            </Link>
+            <button
+              className="header__mobile-btn"
+              onClick={handleOpenMobileMenu}
+            >
+              <img
+                src={mobileMenu}
+                alt="бургер меню"
+              />
+            </button>
+          </div>
+          {isClicked ? (
+            <Navigation handleCloseMobileMenu={handleCloseMobileMenu} />
+          ) : (
+            ""
+          )}
+        </header>
       )}
     </>
-  );
+  )
 }
 
-export default Header;
+export default Header

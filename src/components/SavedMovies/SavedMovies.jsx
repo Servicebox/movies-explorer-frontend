@@ -1,70 +1,59 @@
 import React, { useState, useEffect } from "react";
-import SearchForm from "../Movies/SearchForm/SearchForm";
 import MoviesCardList from "../Movies/MoviesCardList/MoviesCardList";
+import Header from "../Header/Header.jsx";
+import Footer from "../Footer/Footer.jsx";
+import {
+  filterMovies,
+  counterDurationMovie,
+} from "../../utils/functionHelpers.js";
+import SearchForm from "../SearchForm/SearchForm";
 
-import "./SavedMovies.css";
+function SavedMovies({ loggedIn, onDeleteCard, savedMovies }) {
+  const [isShortMovies, setisShortMovies] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [filteredMovies, setFilteredMovies] = useState(savedMovies);
+  const [isNotFound, setIsNotFound] = useState(false);
 
-function SavedMovies({ movies, onDelete }) {
   useEffect(() => {
-    localStorage.setItem("currentPath", "/saved-movies");
-  }, []);
-  const [query, setQuery] = useState("");
-  const [searchResults, setSearchResults] = useState([]);
-  const [isShortFilm, setIsShortFilm] = useState(false);
-  useEffect(() => {
-    setSearchResults(movies);
-  }, [movies]);
-
-  const handleSearch = (newQuery, newIsShortFilm) => {
-    setIsShortFilm(newIsShortFilm);
-
-    const filteredMovies = movies.filter((movie) => {
-      const includesQuery =
-        movie.nameRU.toLowerCase().includes(newQuery.toLowerCase()) ||
-        movie.nameEN.toLowerCase().includes(newQuery.toLowerCase());
-
-      if (newIsShortFilm) {
-        return includesQuery && movie.duration <= 40;
-      } else {
-        return includesQuery;
-      }
-    });
-
-    setSearchResults(filteredMovies);
-  };
-  const filterMovies = (query, isShortFilm) => {
-    let filteredMovies = movies;
-    if (isShortFilm) {
-      filteredMovies = filteredMovies.filter((movie) => movie.duration <= 40);
+    if (filteredMovies.length === 0) {
+      setIsNotFound(true);
+    } else {
+      setIsNotFound(false);
     }
-    const filteredResults = filteredMovies.filter((movie) => {
-      return (
-        movie.nameRU.toLowerCase().includes(query.toLowerCase()) ||
-        movie.nameEN.toLowerCase().includes(query.toLowerCase())
-      );
-    });
+  }, [filteredMovies]);
 
-    setSearchResults(filteredResults);
-  };
+  useEffect(() => {
+    const moviesFilmList = filterMovies(savedMovies, searchQuery);
+    setFilteredMovies(
+      isShortMovies ? counterDurationMovie(moviesFilmList) : moviesFilmList
+    );
+  }, [savedMovies, isShortMovies, searchQuery]);
+
+  function searchMovies(query) {
+    setSearchQuery(query);
+  }
+
+  function shortMoviesToggle() {
+    setisShortMovies(!isShortMovies);
+  }
 
   return (
-    <main className=" moviessaved">
-      <section className="movies movies_saved">
+    <section className="movies">
+      <Header loggedIn={loggedIn} />
       <SearchForm
-        query={query}
-        setQuery={setQuery}
-        isShortFilm={isShortFilm}
-        setIsShortFilm={setIsShortFilm}
-        onSearch={handleSearch}
-        onFilter={filterMovies}
+        getSearchMovies={searchMovies}
+        onFilterMovies={shortMoviesToggle}
+        isShortMovies={isShortMovies}
       />
       <MoviesCardList
-        savedMoviesList={searchResults}
-        isSavedMoviesPage={true}
-        onDelete={onDelete}
-      />{" "}
-      </section>
-    </main>
+        cards={filteredMovies}
+        isSavedFilms={true}
+        savedMovies={savedMovies}
+        onDeleteCard={onDeleteCard}
+        isNotFound={isNotFound}
+      />
+      <Footer />
+    </section>
   );
 }
 
